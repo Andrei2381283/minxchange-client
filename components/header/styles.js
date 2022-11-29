@@ -23,7 +23,7 @@ export const HeaderLink = styled(Link)`
 export const HeaderThemeContainer = styled.div`
     display: flex;
     align-items: center;
-    margin-left: 5em;
+    margin-left: auto;
     cursor: pointer;
     user-select: none;
 `
