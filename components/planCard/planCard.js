@@ -2,7 +2,7 @@ import React from 'react';
 import { ThemeContext, themes } from '../../theme/theme';
 import { HowWorksCardDiv,  HowWorksCardDescr, HowWorksCardNum, HowWorksCardTitle } from '../howWorksCard/styles';
 import { PlanCardDescr } from './styles';
-import ImageGreenLight from '../ImageGreenLight/ImageGreenLight';
+import ImageGreenLight from '../imageGreenLight/imageGreenLight';
 
 const PlanCard = ({ style, number, image, title, children }) => {
 

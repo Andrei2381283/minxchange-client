@@ -1,6 +1,6 @@
 import React from 'react';
 import { ThemeContext, themes } from '../../theme/theme';
-import ImageGreenLight from '../ImageGreenLight/ImageGreenLight';
+import ImageGreenLight from '../imageGreenLight/imageGreenLight';
 import { HowWorksCardDescr, HowWorksCardDiv, HowWorksCardNum, HowWorksCardTitle } from './styles';
 
 const HowWorksCard = ({ style, number, image, title, children }) => {
