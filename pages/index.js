@@ -4,7 +4,7 @@ import { ThemeContext, themes } from '../theme/theme';
 import Header from '../components/header/header'; */
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Page from '../components/page/page';
-import { AboutDescrText, AboutInfosBlock, AboutInfosDescr, AboutInfosLine, AboutInfosTitle, CardsImage, Currency1, Currency2, GreenLine, GreenMarkDiv, GreenMarksDiv, GreenMarkSubText, GreenShadow1, GreenShadow2, HowWorksDiv, IllustrationBlock, IllustrationBlockLeft, IllustrationBlockRight, SectionBlock, SmallTitleText, TitleText, TitleTextH1, WhiteShadow } from '../styles';
+import { AboutDescrText, AboutInfosBlock, AboutInfosDescr, AboutInfosLine, AboutInfosTitle, CardsImage, Currency1, Currency2, FaqBlock, FaqBlockImg, FaqGreenShadow, FaqImg1, FaqImg2, FaqQuestionsBlock, GreenLine, GreenMarkDiv, GreenMarksDiv, GreenMarkSubText, GreenShadow1, GreenShadow2, GreenText, HowWorksDiv, IllustrationBlock, IllustrationBlockLeft, IllustrationBlockRight, ReferalGreenShadow, ReferalLeft, ReferalRight, SectionBlock, SmallTitleText, TitleText, TitleTextH1, WhiteShadow } from '../styles';
 import greenMark from "../assets/greenMark.svg";
 import payeerLeft from "../assets/payeer-left.svg";
 import litecoinLleft from "../assets/litecoin-lleft.svg";
@@ -16,10 +16,22 @@ import currency1 from "../assets/Сurrency1.svg";
 import currency2 from "../assets/Сurrency2.svg";
 import cards from "../assets/cards.svg";
 import howWorks1 from "../assets/howWorks1.svg";
+import faqImg from "../assets/faqImg.svg";
+import faqImgD from "../assets/faqImgD.svg";
+import faqImg1 from "../assets/faqImg1.svg";
+import faqImg1D from "../assets/faqImg1D.svg";
+import faqImg2 from "../assets/faqImg2.svg";
+import faqImg2D from "../assets/faqImg2D.svg";
+import referalImg from "../assets/referalImg.svg";
+import referalsArrow from "../assets/referalsArrow.svg";
 import Image from 'next/image';
 import GreenBtn from '../components/greenBtn/greenBtn';
 import WhyUsText from '../components/whyUsText/whyUsText';
 import HowWorksCard from '../components/howWorksCard/howWorksCard';
+import WithdrawBlock from '../components/withdrawBlock/withdrawBlock';
+import PlanCard from '../components/planCard/planCard';
+import { FaqQuestionBlock } from '../components/faqQuestion/styles';
+import FaqQuestion from '../components/faqQuestion/faqQuestion';
 
 
 export async function getStaticProps({ locale }) {
@@ -74,8 +86,8 @@ export default function Home(props) {
                     <Currency2 src={currency2} />
                 </IllustrationBlockRight>
             </IllustrationBlock>
-            <SectionBlock>
-                <SmallTitleText style={{fontSize: "4em"}}>“</SmallTitleText>
+            <SectionBlock id='aboutBlock'>
+                <SmallTitleText style={{ fontSize: "4em" }}>“</SmallTitleText>
                 <AboutDescrText>Каждый день мы стараеся делать покупку и продажу криптовалюты доступным для каждого пользователя.<br />MintExchange предлагает удобное решение для обмена криптовалюты и вывода средтв на Вашу банковскую карту</AboutDescrText>
                 <AboutInfosBlock>
                     <div>
@@ -99,43 +111,83 @@ export default function Home(props) {
                     </div>
                 </AboutInfosBlock>
             </SectionBlock>
-            <SectionBlock>
+            <SectionBlock id='whyUsBlock'>
                 <SmallTitleText>Мы лучшие в своём деле</SmallTitleText>
                 <TitleText>Почему мы?</TitleText>
-                <WhyUsText style={{top: "11.875em", left: "6.32%"}}>Одни из лучших курсов обмена</WhyUsText>
-                <WhyUsText style={{top: "16.875em", left: "2.53%"}}>Низкие комиссии</WhyUsText>
-                <WhyUsText style={{top: "21.875em", left: "0"}}>Партнерская программа</WhyUsText>
-                <WhyUsText style={{top: "26.875em", left: "2.53%"}}>Онлайн поддержка</WhyUsText>
-                <WhyUsText style={{top: "31.875em", left: "6.32%"}}>Сервис доступен каждому</WhyUsText>
-                <WhyUsText style={{top: "11.875em", left: "72.344%"}}>Обмен онлайн без рисков</WhyUsText>
-                <WhyUsText style={{top: "16.875em", left: "74.873%"}}>Скорость операции</WhyUsText>
-                <WhyUsText style={{top: "21.875em", left: "78.667%"}}>Конфиденциальность</WhyUsText>
-                <WhyUsText style={{top: "26.875em", left: "74.873%"}}>Простота</WhyUsText>
-                <WhyUsText style={{top: "31.875em", left: "72.344%"}}>Работы с банковским переводами</WhyUsText>
+                <WhyUsText style={{ top: "11.875em", left: "6.32%" }}>Одни из лучших курсов обмена</WhyUsText>
+                <WhyUsText style={{ top: "16.875em", left: "2.53%" }}>Низкие комиссии</WhyUsText>
+                <WhyUsText style={{ top: "21.875em", left: "0" }}>Партнерская программа</WhyUsText>
+                <WhyUsText style={{ top: "26.875em", left: "2.53%" }}>Онлайн поддержка</WhyUsText>
+                <WhyUsText style={{ top: "31.875em", left: "6.32%" }}>Сервис доступен каждому</WhyUsText>
+                <WhyUsText style={{ top: "11.875em", left: "72.344%" }}>Обмен онлайн без рисков</WhyUsText>
+                <WhyUsText style={{ top: "16.875em", left: "74.873%" }}>Скорость операции</WhyUsText>
+                <WhyUsText style={{ top: "21.875em", left: "78.667%" }}>Конфиденциальность</WhyUsText>
+                <WhyUsText style={{ top: "26.875em", left: "74.873%" }}>Простота</WhyUsText>
+                <WhyUsText style={{ top: "31.875em", left: "72.344%" }}>Работы с банковским переводами</WhyUsText>
                 <CardsImage src={cards} alt="Cards" />
                 <GreenBtn>Начать</GreenBtn>
             </SectionBlock>
-            <SectionBlock>
+            <SectionBlock id='howItWorksBlock'>
                 <SmallTitleText>Последовательность</SmallTitleText>
                 <TitleText>Как это работает?</TitleText>
                 <HowWorksDiv>
                     <HowWorksCard number="1" image={howWorks1} title="Регистрация">Пройдите  процедуру регистрации и верификации личности.</HowWorksCard>
-                    <HowWorksCard style={{marginLeft: "1em"}} number="2" image={howWorks1} title="Регистрация">Пройдите  процедуру регистрации и верификации личности.</HowWorksCard>
-                    <HowWorksCard style={{marginLeft: "1em"}} number="3" image={howWorks1} title="Регистрация">Пройдите  процедуру регистрации и верификации личности.</HowWorksCard>
-                    <HowWorksCard style={{marginLeft: "1em"}} number="4" image={howWorks1} title="Регистрация">Пройдите  процедуру регистрации и верификации личности.</HowWorksCard>
+                    <HowWorksCard style={{ marginLeft: "1em" }} number="2" image={howWorks1} title="Регистрация">Пройдите  процедуру регистрации и верификации личности.</HowWorksCard>
+                    <HowWorksCard style={{ marginLeft: "1em" }} number="3" image={howWorks1} title="Регистрация">Пройдите  процедуру регистрации и верификации личности.</HowWorksCard>
+                    <HowWorksCard style={{ marginLeft: "1em" }} number="4" image={howWorks1} title="Регистрация">Пройдите  процедуру регистрации и верификации личности.</HowWorksCard>
                 </HowWorksDiv>
             </SectionBlock>
-            <SectionBlock>
+            <SectionBlock id='withdrawBlock'>
                 <SmallTitleText>Попробуйте</SmallTitleText>
                 <TitleText>Обменник криптовалют</TitleText>
+                <WithdrawBlock />
             </SectionBlock>
             <SectionBlock>
                 <SmallTitleText>в ближайшее время</SmallTitleText>
                 <TitleText>План по развитию</TitleText>
+                <HowWorksDiv>
+                    <PlanCard image={howWorks1}>Выводите средства, пополняйте криптокошельки с помощью наших <GreenText>банкоматов</GreenText></PlanCard>
+                    <PlanCard style={{ marginLeft: "1em" }} image={howWorks1}>Выводите средства, пополняйте криптокошельки с помощью наших <GreenText>банкоматов</GreenText></PlanCard>
+                    <PlanCard style={{ marginLeft: "1em" }} image={howWorks1}>Выводите средства, пополняйте криптокошельки с помощью наших <GreenText>банкоматов</GreenText></PlanCard>
+                    <PlanCard style={{ marginLeft: "1em" }} image={howWorks1}>Выводите средства, пополняйте криптокошельки с помощью наших <GreenText>банкоматов</GreenText></PlanCard>
+                </HowWorksDiv>
             </SectionBlock>
             <SectionBlock>
                 <SmallTitleText>Вы часто спрашиваете</SmallTitleText>
                 <TitleText>FAQ</TitleText>
+                <FaqBlock>
+                    <ThemeContext.Consumer>
+                        {({ theme }) => (
+                            <FaqBlockImg>
+                                <FaqGreenShadow />
+                                <Image style={{ width: "32.75rem", height: "auto" }} src={theme == themes.light ? faqImg : faqImgD} />
+                                <FaqImg1 theme={theme.name} src={theme == themes.light ? faqImg1 : faqImg1D} />
+                                <FaqImg2 theme={theme.name} src={theme == themes.light ? faqImg2 : faqImg2D} />
+                            </FaqBlockImg>
+                        )}
+                    </ThemeContext.Consumer>
+                    <FaqQuestionsBlock>
+                        <FaqQuestion title='Какие валюты поддерживает Mintxchange?'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique ornare quam commodo magna. Convallis ullamcorper nulla nibh et turpis suspendisse aliquam. Quam massa cursus scelerisque fringilla quam quisque nunc. Hac tempor cursus maecenas in suscipit. Donec aliquet elit, in nulla risus in eget ac. Aliquam odio accumsan non libero, sagittis, nibh morbi.</FaqQuestion>
+                        <FaqQuestion title='Какие гарантии безопасности вы даёте?'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique ornare quam commodo magna. Convallis ullamcorper nulla nibh et turpis suspendisse aliquam. Quam massa cursus scelerisque fringilla quam quisque nunc. Hac tempor cursus maecenas in suscipit. Donec aliquet elit, in nulla risus in eget ac. Aliquam odio accumsan non libero, sagittis, nibh morbi.</FaqQuestion>
+                        <FaqQuestion title='Сколько времени занимает процес верификации личности?'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique ornare quam commodo magna. Convallis ullamcorper nulla nibh et turpis suspendisse aliquam. Quam massa cursus scelerisque fringilla quam quisque nunc. Hac tempor cursus maecenas in suscipit. Donec aliquet elit, in nulla risus in eget ac. Aliquam odio accumsan non libero, sagittis, nibh morbi.</FaqQuestion>
+                        <FaqQuestion title='Какую сумму я могу обменять за один раз?'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique ornare quam commodo magna. Convallis ullamcorper nulla nibh et turpis suspendisse aliquam. Quam massa cursus scelerisque fringilla quam quisque nunc. Hac tempor cursus maecenas in suscipit. Donec aliquet elit, in nulla risus in eget ac. Aliquam odio accumsan non libero, sagittis, nibh morbi.</FaqQuestion>
+                    </FaqQuestionsBlock>
+                </FaqBlock>
+            </SectionBlock>
+            <SectionBlock style={{flexDirection: "row", justifyContent: "space-between"}}>
+                <ReferalLeft>
+                    <SmallTitleText>Реферальная программа</SmallTitleText>
+                    <TitleText style={{marginTop: "1rem", marginBottom: "2rem"}}>Приглашайте друзей</TitleText>
+                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique ornare quam commodo magna. Convallis ullamcorper nulla nibh et turpis suspendisse aliquam. Quam massa cursus scelerisque fringilla quam quisque nunc. Hac tempor cursus maecenas in suscipit. </span>
+                    <GreenBtn style={{marginTop: "3.5rem"}}>Пригласить</GreenBtn>
+                </ReferalLeft>
+                <ReferalRight>
+                    <ReferalGreenShadow />
+                    <Image style={{ width: "41.6875rem", height: "auto" }} src={referalImg} />
+                </ReferalRight>
+            </SectionBlock>
+            <SectionBlock>
+                
             </SectionBlock>
         </Page>
     )

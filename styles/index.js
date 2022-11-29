@@ -172,3 +172,88 @@ export const CardsImage = styled(Image)`
 export const HowWorksDiv = styled.div`
     display: flex;
 `
+
+export const GreenText = styled.span`
+    color: #27BE98;
+`
+
+export const FaqBlock = styled.div`
+    display: flex;
+    justify-content: space-between;
+`
+
+export const FaqBlockImg = styled.div`
+    position: relative;
+`
+
+export const FaqImg1 = styled(Image)`
+    position: absolute;
+    top: 11.75rem;
+    left: 0.25rem;
+    height: auto;
+    width: 5.75rem;
+    ${props => props.theme == "Light" ? `
+        background: #FFFFFF;
+        box-shadow: 10.4968px 20.9936px 23.3262px rgba(85, 117, 109, 0.09);
+    ` : `
+        background: rgba(255, 255, 255, 0.06);
+        box-shadow: 11.3291px 22.6583px 25.1759px rgba(85, 117, 109, 0.09);
+        backdrop-filter: blur(15px);
+    `}
+    border-radius: 6.29397px;
+`
+
+export const FaqImg2 = styled(Image)`
+    position: absolute;
+    top: 14.4375rem;
+    left: 19.625rem;
+    height: auto;
+    width: 12.5625rem;
+    ${props => props.theme == "Light" ? `
+        background: linear-gradient(311.46deg, rgba(255, 255, 255, 0.28) 2.47%, rgba(255, 255, 255, 0) 118.77%);
+        filter: drop-shadow(-3.70613px 3.70613px 12.9714px rgba(85, 117, 109, 0.18));
+        backdrop-filter: blur(13.898px);
+    ` : `
+        background: linear-gradient(311.46deg, rgba(236, 236, 241, 0.12) 2.47%, rgba(0, 0, 0, 0.1) 118.77%);
+        backdrop-filter: blur(15px);
+    `}
+`
+
+export const FaqGreenShadow = styled.div`
+    background: #38E7BA;
+    opacity: 0.46;
+    filter: blur(134.347px);
+    position: absolute;
+    top: 14.25rem;
+    left: -3.25rem;
+    width: 29.0625rem;
+    height: 9.125rem;
+`
+
+export const FaqQuestionsBlock = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-left: 7.5rem;
+`
+
+export const ReferalLeft = styled.div`
+    display: flex;
+    flex-direction: column  ;
+`
+
+export const ReferalRight = styled.div`
+    display: flex;
+    position: relative;
+`
+
+export const ReferalGreenShadow = styled.div`
+    background: #38E7BA;
+    opacity: 0.46;
+    filter: blur(134.347px);
+    position: absolute;
+    top: 11.375rem;
+    left: 5.375rem;
+    width: 28.5rem;
+    height: 14rem;
+    z-index: -1;
+`

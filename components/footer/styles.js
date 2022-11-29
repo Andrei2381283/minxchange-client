@@ -1,5 +1,33 @@
+import Link from "next/link";
 import styled from "styled-components";
 
 export const FooterContainer = styled.footer`
-    
+    padding: 4rem 7rem;
+    ${props => props.theme == "Light" ? 
+    `background: linear-gradient(90.75deg, #0A1A1B 6.88%, #010102 50.65%);` :
+    `border-top: 1px solid rgba(255, 255, 255, 0.15);`
+    }
+    color: white;
+    display: flex;
+`
+
+export const FooterLinksDiv = styled.nav`
+    display: flex;
+    flex-direction: column;
+    margin-left: 4.5rem;
+
+    //color: #ECECF1;/* ${props => props.theme == "Light" ? "#ECECF1" : "#ECECF1"}; */
+
+    &:first-of-type {
+        margin-left: auto;
+    }
+`
+
+export const FooterLink = styled(Link)`
+    margin-top: 0.5rem;
+    color: #ECECF1;
+    text-decoration: none;
+    &:first-of-type {
+        margin-top: 0;
+    }
 `

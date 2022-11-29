@@ -13,10 +13,10 @@ const Header = () => {
     
     return <HeaderContainer>
         <Logo />
-        <HeaderLink href="/about">{t("about")}</HeaderLink>
-        <HeaderLink href="">{t("why")}</HeaderLink>
-        <HeaderLink href="">{t("how-works")}</HeaderLink>
-        <HeaderLink href="">{t("withdraw")}</HeaderLink>
+        <HeaderLink href="#aboutBlock">{t("about")}</HeaderLink>
+        <HeaderLink href="#whyUsBlock">{t("why")}</HeaderLink>
+        <HeaderLink href="#howItWorksBlock">{t("how-works")}</HeaderLink>
+        <HeaderLink href="/funds">{t("withdraw")}</HeaderLink>
         <ThemeContext.Consumer>
             {({theme, changeTheme}) => 
             <>
