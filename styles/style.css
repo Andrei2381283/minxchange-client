@@ -2,12 +2,22 @@ html, body {
     padding: 0;
     margin: 0;
 }
+    
+@keyframes opacityAnim {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
 
 * {
     box-sizing: border-box;
     scroll-behavior: smooth;
+    animation: 0.4s opacityAnim;
 }
-
 
 @media (max-width: 1300px) {
     html {

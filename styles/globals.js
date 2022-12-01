@@ -5,6 +5,7 @@ export const GlobalStyle = createGlobalStyle`
     background-color: ${props => props.theme.bg};
     color: ${props => props.theme.color};
     font-family: 'Gilroy';
+    transition: 0.5s;
   }
 `
 

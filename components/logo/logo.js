@@ -1,14 +1,16 @@
 import Image from 'next/image';
 import React from 'react';
 import logo from "../../assets/logo.png";
-import { LogoContainer, LogoText } from './styles';
+import { LogoContainer, LogoContainerL, LogoText } from './styles';
 
-const Logo = () => {
+const Logo = ({ isLink }) => {
 
-    return <LogoContainer>
+    const LogoContainer_ = isLink ? LogoContainerL : LogoContainer;
+    
+    return <LogoContainer_ href="/">
         <Image src={logo} alt="Logo" />
         <LogoText>Mintxchange</LogoText>
-    </LogoContainer>
+    </LogoContainer_>
 }
 
 export default Logo;

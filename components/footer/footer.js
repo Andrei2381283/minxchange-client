@@ -8,14 +8,14 @@ const Footer = () => {
     return <ThemeContext.Consumer>
         {({ theme }) => (
             <FooterContainer theme={theme.name}>
-                <Logo />
+                <Logo isLink />
                 <FooterLinksDiv>
-                    <FooterLink href="">О нас</FooterLink>
-                    <FooterLink href="">Почему мы</FooterLink>
+                    <FooterLink scroll={false} href="/#aboutBlock">О нас</FooterLink>
+                    <FooterLink scroll={false} href="/#whyUsBlock">Почему мы</FooterLink>
                 </FooterLinksDiv>
                 <FooterLinksDiv>
-                    <FooterLink href="">Как это работает</FooterLink>
-                    <FooterLink href="">Ввод/Вывод средств</FooterLink>
+                    <FooterLink scroll={false} href="/#howItWorksBlock">Как это работает</FooterLink>
+                    <FooterLink href="/funds">Ввод/Вывод средств</FooterLink>
                 </FooterLinksDiv>
                 <FooterLinksDiv>
                     <FooterLink href="">Политика конфиденциальности</FooterLink>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styled from "styled-components";
+import { themes } from "../../theme/theme";
 
 export const LightBtnLink = styled(Link)`
     border-radius: 3px;
@@ -11,6 +12,13 @@ export const LightBtnLink = styled(Link)`
     padding: 0.75em 1em;
     color: inherit;
     text-decoration: none;
-    border: 1px solid ${props => props.color};
+    border: 1px solid ${props => props.theme == "Light" ? "#162329" : "#38E7BA"};
     cursor: pointer;
+
+    transition: 0.2s;
+
+    &:hover {
+        background: ${props => props.theme == "Light" ? "#162329" : "#38E7BA"};;
+        color: ${props => props.theme == "Light" ? themes.dark.color : themes.light.color};;
+    }
 `

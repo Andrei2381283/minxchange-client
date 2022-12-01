@@ -12,10 +12,10 @@ const Header = () => {
     const { t, i18n } = useTranslation("header");
     
     return <HeaderContainer>
-        <Logo />
-        <HeaderLink href="#aboutBlock">{t("about")}</HeaderLink>
-        <HeaderLink href="#whyUsBlock">{t("why")}</HeaderLink>
-        <HeaderLink href="#howItWorksBlock">{t("how-works")}</HeaderLink>
+        <Logo isLink />
+        <HeaderLink scroll={false} href="/#aboutBlock">{t("about")}</HeaderLink>
+        <HeaderLink scroll={false} href="/#whyUsBlock">{t("why")}</HeaderLink>
+        <HeaderLink scroll={false} href="/#howItWorksBlock">{t("how-works")}</HeaderLink>
         <HeaderLink href="/funds">{t("withdraw")}</HeaderLink>
         <ThemeContext.Consumer>
             {({theme, changeTheme}) => 

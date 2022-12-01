@@ -64,6 +64,96 @@ export const GreenLine = styled.div`
     background: rgba(56, 231, 186, 0.4);
 `
 
+export const CryptoAnimatedImg = styled(Image)`
+    @keyframes vertAnim {
+        from {
+            transform: translateY(-5%);
+        }
+
+        to {
+            transform: translateY(5%)
+        }
+    }
+
+    animation: 5s infinite alternate ease-in-out vertAnim;
+`
+
+export const LitecoinImg = styled(CryptoAnimatedImg)`
+    position: absolute;
+    left: 25.375em;
+    top: -0.6625em;
+    height: auto;
+    width: 3em;
+    
+    @keyframes vertAnimLitecoin {
+        from {
+            transform: translateY(-16%);
+        }
+
+        to {
+            transform: translateY(16%)
+        }
+    }
+    animation-name: vertAnimLitecoin;
+`
+
+export const PayeerImg = styled(CryptoAnimatedImg)`
+    position: absolute;
+    left: 8.56625em;
+    top: 1.236875em;
+    height: auto;
+    width: 6.5625em;
+    
+    @keyframes vertAnimPayeer {
+        from {
+            transform: translateY(-12%);
+        }
+
+        to {
+            transform: translateY(12%)
+        }
+    }
+    animation-name: vertAnimPayeer;
+`
+
+export const TetherImg = styled(CryptoAnimatedImg)`
+    position: absolute;
+    left: -3.0625em;
+    top: 13.8125em;
+    height: auto;
+    width: 10.5625em;
+    
+    @keyframes vertAnimTether {
+        from {
+            transform: translateY(-8%);
+        }
+
+        to {
+            transform: translateY(8%)
+        }
+    }
+    animation-name: vertAnimTether;
+`
+
+export const DollarImg = styled(CryptoAnimatedImg)`
+    position: absolute;
+    right: 0;
+    top: 7.75em;
+    height: auto;
+    width: 11.125em;
+    
+    @keyframes vertAnimDollar {
+        from {
+            transform: translateY(-5%);
+        }
+
+        to {
+            transform: translateY(5%)
+        }
+    }
+    animation-name: vertAnimDollar;
+`
+
 export const Currency1 = styled(Image)`
     position: absolute;
     width: 13.75em;
@@ -115,6 +205,19 @@ export const WhiteShadow = styled.div`
     background: ${props => props.color};
     left: 0/* 3.0625em */;
     top: 20.625em;
+    transition: 0.5s;
+    
+    @keyframes opacityAnim_ {
+        from {
+            opacity: 0;
+        }
+    
+        to {
+            opacity: 1;
+        }
+    }
+    
+    animation: 5.5s opacityAnim_;
 `
 
 export const SectionBlock = styled.div`
@@ -255,5 +358,91 @@ export const ReferalGreenShadow = styled.div`
     left: 5.375rem;
     width: 28.5rem;
     height: 14rem;
+    z-index: -1;
+`
+
+export const PartnersTitle = styled.h2`
+    font-size: 2rem;
+    color: #95A8B6;
+    font-weight: 400;
+`
+
+export const PartnersDiv = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+`
+
+export const PartnersBtn = styled.button`
+    width: 2.875rem;
+    height: 2.875rem;
+    border: 1px solid #95A8B6;
+    background: transparent;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:first-of-type {
+        margin-right: 1.25rem;
+    }
+
+    &:last-of-type {
+        margin-left: 1.25rem;
+        rotate: 180deg;
+    }
+`
+
+export const FundsSection = styled(SectionBlock)`
+    background-color: ${props => props.theme == "Light" ? "white" : "#0C0D1B"};
+    padding: 4rem 12.5rem 4.5rem;
+    box-shadow: 18px 15px 21px rgba(149, 168, 182, 0.04);
+    border-radius: 5px;
+    transition: 0.5s;
+    align-items: flex-start;
+`
+
+export const FundsTitle = styled.h3`
+    font-weight: 500;
+    font-size: 2rem;
+    margin: 0;
+    display: flex;
+
+    &::before {
+        content: "";
+        background: #3AD5AD;
+        border-radius: 3px;
+        min-width: 3px;
+        width: 3px;
+        margin: 0.4rem 1rem 0.4rem 0;
+    }
+`
+
+export const FundsText = styled.p`
+    margin: 1.5rem 0 0 0;
+`
+
+export const FundsShadow1 = styled.div`
+    position: absolute;
+    left: -11.75rem;
+    top: 32.5rem;
+    width: 31.875rem;
+    height: 28.125rem;
+    background: #38E7BA;
+    opacity: 0.2;
+    filter: blur(145px);
+    z-index: -1;
+`
+
+export const FundsShadow2 = styled.div`
+    position: absolute;
+    right: -5rem;
+    top: 18.75rem;
+    width: 31.875rem;
+    height: 28.125rem;
+    background: #38E7BA;
+    opacity: 0.2;
+    filter: blur(145px);
     z-index: -1;
 `

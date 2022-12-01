@@ -29,3 +29,10 @@ export const FaqQuestionTitle = styled.span`
     font-weight: 500;
     font-size: 1.25rem;
 `
+
+export const FaqQuestionAnswer = styled.div`
+    margin-top: 1rem;
+    overflow: hidden;
+    opacity: 0;
+    transition: 0.3s;
+`

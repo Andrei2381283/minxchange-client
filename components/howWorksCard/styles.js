@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import GreenNumber from "../greenNumber/greenNumber";
 
 export const HowWorksCardDiv = styled.div`
     display: flex;
@@ -25,18 +26,9 @@ export const HowWorksCardDescr = styled.span`
     color: ${props => props.color};
 `
 
-export const HowWorksCardNum = styled.div`
+export const HowWorksCardNum = styled(GreenNumber)`
     position: absolute;
     top: 0;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #38E7BA;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #38E7BA;
-    border-radius: 50%;
-    width: 2.25em;
-    height: 2.25em;
-    color: ${props => props.color};
 `

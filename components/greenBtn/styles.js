@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export const GreenBtnLink = styled(Link)`
     background: #38E7BA;
+    border: 1px solid #38E7BA;
     border-radius: 3px;
     user-select: none;
     font-weight: 600;
@@ -14,4 +15,11 @@ export const GreenBtnLink = styled(Link)`
     text-decoration: none;
     cursor: pointer;
     width: fit-content;
+
+    transition: 0.2s;
+
+    &:hover {
+        background: transparent;
+        color: inherit;
+    }
 `

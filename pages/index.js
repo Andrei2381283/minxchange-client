@@ -4,7 +4,7 @@ import { ThemeContext, themes } from '../theme/theme';
 import Header from '../components/header/header'; */
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Page from '../components/page/page';
-import { AboutDescrText, AboutInfosBlock, AboutInfosDescr, AboutInfosLine, AboutInfosTitle, CardsImage, Currency1, Currency2, FaqBlock, FaqBlockImg, FaqGreenShadow, FaqImg1, FaqImg2, FaqQuestionsBlock, GreenLine, GreenMarkDiv, GreenMarksDiv, GreenMarkSubText, GreenShadow1, GreenShadow2, GreenText, HowWorksDiv, IllustrationBlock, IllustrationBlockLeft, IllustrationBlockRight, ReferalGreenShadow, ReferalLeft, ReferalRight, SectionBlock, SmallTitleText, TitleText, TitleTextH1, WhiteShadow } from '../styles';
+import { AboutDescrText, AboutInfosBlock, AboutInfosDescr, AboutInfosLine, AboutInfosTitle, CardsImage, Currency1, Currency2, DollarImg, FaqBlock, FaqBlockImg, FaqGreenShadow, FaqImg1, FaqImg2, FaqQuestionsBlock, GreenLine, GreenMarkDiv, GreenMarksDiv, GreenMarkSubText, GreenShadow1, GreenShadow2, GreenText, HowWorksDiv, IllustrationBlock, IllustrationBlockLeft, IllustrationBlockRight, LitecoinImg, PartnersBtn, PartnersDiv, PartnersTitle, PayeerImg, ReferalGreenShadow, ReferalLeft, ReferalRight, SectionBlock, SmallTitleText, TetherImg, TitleText, TitleTextH1, WhiteShadow } from '../styles';
 import greenMark from "../assets/greenMark.svg";
 import payeerLeft from "../assets/payeer-left.svg";
 import litecoinLleft from "../assets/litecoin-lleft.svg";
@@ -23,7 +23,10 @@ import faqImg1D from "../assets/faqImg1D.svg";
 import faqImg2 from "../assets/faqImg2.svg";
 import faqImg2D from "../assets/faqImg2D.svg";
 import referalImg from "../assets/referalImg.svg";
-import referalsArrow from "../assets/referalsArrow.svg";
+import partnersArrow from "../assets/partnersArrow.svg";
+import bestchange from "../assets/bestchange.svg";
+import binance from "../assets/binance.svg";
+import blockchain from "../assets/blockchain.svg";
 import Image from 'next/image';
 import GreenBtn from '../components/greenBtn/greenBtn';
 import WhyUsText from '../components/whyUsText/whyUsText';
@@ -77,10 +80,10 @@ export default function Home(props) {
                             <WhiteShadow color={theme == themes.light ? "linear-gradient(180deg, rgba(250, 250, 250, 0) 0%, #FAFAFA 62.16%)" : "linear-gradient(180deg, rgba(4, 3, 16, 0) 0%, #040310 62.16%)"} />
                         )}
                     </ThemeContext.Consumer>
-                    <Image style={{ position: "absolute", left: "8.56625em", top: "1.236875em", height: "auto", width: "6.5625em" }} src={payeerLeft} />
-                    <Image style={{ position: "absolute", left: "25.375em", top: "-0.6625em", height: "auto", width: "3em" }} src={litecoinLleft} />
-                    <Image style={{ position: "absolute", right: "0", top: "7.75em", height: "auto", width: "11.125em" }} src={dollar} />
-                    <Image style={{ position: "absolute", left: "-3.0625em", top: "13.8125em", height: "auto", width: "10.5625em" }} src={tether} />
+                    <PayeerImg src={payeerLeft} />
+                    <LitecoinImg src={litecoinLleft} />
+                    <DollarImg  src={dollar} />
+                    <TetherImg src={tether} />
                     {/* <Image style={{width: "100%"}} src={Illustration}/> */}
                     <Currency1 src={currency1} />
                     <Currency2 src={currency2} />
@@ -141,6 +144,7 @@ export default function Home(props) {
                 <SmallTitleText>Попробуйте</SmallTitleText>
                 <TitleText>Обменник криптовалют</TitleText>
                 <WithdrawBlock />
+                <GreenBtn style={{marginTop: "4rem"}}>Начать</GreenBtn>
             </SectionBlock>
             <SectionBlock>
                 <SmallTitleText>в ближайшее время</SmallTitleText>
@@ -187,7 +191,18 @@ export default function Home(props) {
                 </ReferalRight>
             </SectionBlock>
             <SectionBlock>
-                
+                <PartnersTitle>Партнеры</PartnersTitle>
+                <PartnersDiv>
+                    <PartnersBtn>
+                        <Image src={partnersArrow} />
+                    </PartnersBtn>
+                    <Image style={{ width: "17.75rem", height: "auto" }} src={bestchange} />
+                    <Image style={{ width: "17.75rem", height: "auto" }} src={binance} />
+                    <Image style={{ width: "18.75rem", height: "auto" }} src={blockchain} />
+                    <PartnersBtn>
+                        <Image src={partnersArrow} />
+                    </PartnersBtn>
+                </PartnersDiv>
             </SectionBlock>
         </Page>
     )

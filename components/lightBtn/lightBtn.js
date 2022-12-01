@@ -6,7 +6,7 @@ const LightBtn = ({ style, href, children }) => {
 
     return <ThemeContext.Consumer>
         {({theme}) => 
-            <LightBtnLink color={theme == themes.light ? "#162329" : "#38E7BA"} style={style || {}} href={href || ""}>
+            <LightBtnLink theme={theme.name} color={theme == themes.light ? "#162329" : "#38E7BA"} style={style || {}} href={href || ""}>
                 {children}
             </LightBtnLink>
         }

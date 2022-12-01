@@ -9,6 +9,7 @@ export const FooterContainer = styled.footer`
     }
     color: white;
     display: flex;
+    margin-top: 13.75rem;
 `
 
 export const FooterLinksDiv = styled.nav`
