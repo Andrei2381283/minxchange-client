@@ -8,7 +8,7 @@ const HowWorksCard = ({ style, number, image, title, children }) => {
     return <ThemeContext.Consumer>
         {({theme}) => (
             <HowWorksCardDiv color={theme == themes.light ? "linear-gradient(0deg, #FFFFFF, #FFFFFF), rgba(85, 117, 109, 0.05);" : "#0C0D1B"} style={style || {}}>
-                <HowWorksCardNum>{number}</HowWorksCardNum>
+                <HowWorksCardNum theme={theme.name}>{number}</HowWorksCardNum>
                 <ImageGreenLight src={image} />
                 <HowWorksCardTitle>{title}</HowWorksCardTitle>
                 <HowWorksCardDescr color={theme == themes.light ? "#162329" : "#53555E"}>{children}</HowWorksCardDescr>
