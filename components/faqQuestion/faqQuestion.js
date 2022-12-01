@@ -21,7 +21,6 @@ const FaqQuestion = ({ style, title, children }) => {
     }
 
     useEffect(() => {
-        console.log("Hi?");
         Array.prototype.forEach.call(document.getElementsByClassName("faq-answer"), function(elem){
             console.log(elem.offsetHeight);
             const height = elem.offsetHeight;
@@ -30,10 +29,7 @@ const FaqQuestion = ({ style, title, children }) => {
                 elem.style.opacity = "1";
                 elem.style.height = height + "px";
             }, 0)
-        })
-        return () => {
-            console.log("Clear?");
-        }
+        });
     })
 
     return <FaqQuestionBlock className='faq-block' onClick={onClick}>
