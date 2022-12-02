@@ -3,8 +3,18 @@ import { ThemeContext, themes } from '../theme/theme';
 /* import Footer from '../components/footer/footer';
 import Header from '../components/header/header'; */
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import cookie from "cookie";
+
 import Page from '../components/page/page';
 import { AboutDescrText, AboutInfosBlock, AboutInfosDescr, AboutInfosLine, AboutInfosTitle, CardsImage, Currency1, Currency2, DollarImg, FaqBlock, FaqBlockImg, FaqGreenShadow, FaqImg1, FaqImg2, FaqQuestionsBlock, GreenLine, GreenMarkDiv, GreenMarksDiv, GreenMarkSubText, GreenShadow1, GreenShadow2, GreenText, HowWorksDiv, IllustrationBlock, IllustrationBlockLeft, IllustrationBlockRight, LitecoinImg, PartnersBtn, PartnersDiv, PartnersTitle, PayeerImg, ReferalGreenShadow, ReferalLeft, ReferalRight, SectionBlock, SmallTitleText, TetherImg, TitleText, TitleTextH1, WhiteShadow } from '../styles';
+import Image from 'next/image';
+import GreenBtn from '../components/greenBtn/greenBtn';
+import WhyUsText from '../components/whyUsText/whyUsText';
+import HowWorksCard from '../components/howWorksCard/howWorksCard';
+import WithdrawBlock from '../components/withdrawBlock/withdrawBlock';
+import PlanCard from '../components/planCard/planCard';
+import FaqQuestion from '../components/faqQuestion/faqQuestion';
+
 import greenMark from "../assets/greenMark.svg";
 import payeerLeft from "../assets/payeer-left.svg";
 import litecoinLleft from "../assets/litecoin-lleft.svg";
@@ -14,6 +24,8 @@ import tether from "../assets/tether.svg";
 import smartphone from "../assets/smartphone.svg";
 import currency1 from "../assets/Сurrency1.svg";
 import currency2 from "../assets/Сurrency2.svg";
+import currency1D from "../assets/Сurrency1D.svg";
+import currency2D from "../assets/Сurrency2D.svg";
 import cards from "../assets/cards.svg";
 import howWorks1 from "../assets/howWorks1.svg";
 import faqImg from "../assets/faqImg.svg";
@@ -27,19 +39,13 @@ import partnersArrow from "../assets/partnersArrow.svg";
 import bestchange from "../assets/bestchange.svg";
 import binance from "../assets/binance.svg";
 import blockchain from "../assets/blockchain.svg";
-import Image from 'next/image';
-import GreenBtn from '../components/greenBtn/greenBtn';
-import WhyUsText from '../components/whyUsText/whyUsText';
-import HowWorksCard from '../components/howWorksCard/howWorksCard';
-import WithdrawBlock from '../components/withdrawBlock/withdrawBlock';
-import PlanCard from '../components/planCard/planCard';
-import { FaqQuestionBlock } from '../components/faqQuestion/styles';
-import FaqQuestion from '../components/faqQuestion/faqQuestion';
 
 
-export async function getStaticProps({ locale }) {
+
+export async function getServerSideProps({ req, locale }) {
     return {
         props: {
+            _theme: cookie.parse(req.headers.cookie || "").theme || "Light",
             ...(await serverSideTranslations(locale, ['common', 'header'])),
             // Will be passed to the page component as props
         },
@@ -72,21 +78,22 @@ export default function Home(props) {
                     <GreenBtn style={{ marginTop: "7em" }}>Начать</GreenBtn>
                 </IllustrationBlockLeft>
                 <IllustrationBlockRight>
-                    <GreenShadow1 />
-                    <GreenShadow2 />
-                    <Image style={{ position: "absolute", left: "6.9375em", top: "2.15em", height: "auto", width: "29.75em" }} src={smartphone} />
                     <ThemeContext.Consumer>
                         {({ theme }) => (
-                            <WhiteShadow color={theme == themes.light ? "linear-gradient(180deg, rgba(250, 250, 250, 0) 0%, #FAFAFA 62.16%)" : "linear-gradient(180deg, rgba(4, 3, 16, 0) 0%, #040310 62.16%)"} />
+                            <>
+                                <GreenShadow1 />
+                                <GreenShadow2 />
+                                <Image style={{ position: "absolute", left: "6.9375em", top: "2.15em", height: "auto", width: "29.75em" }} src={smartphone} />
+                                        <WhiteShadow color={theme == themes.light ? "linear-gradient(180deg, rgba(250, 250, 250, 0) 0%, #FAFAFA 62.16%)" : "linear-gradient(180deg, rgba(4, 3, 16, 0) 0%, #040310 62.16%)"} />
+                                <PayeerImg src={payeerLeft} />
+                                <LitecoinImg src={litecoinLleft} />
+                                <DollarImg  src={dollar} />
+                                <TetherImg src={tether} />
+                                <Currency1 theme={theme.name} src={theme == themes.light ? currency1 : currency1D} />
+                                <Currency2 theme={theme.name} src={theme == themes.light ? currency2 : currency2D} />
+                            </>
                         )}
                     </ThemeContext.Consumer>
-                    <PayeerImg src={payeerLeft} />
-                    <LitecoinImg src={litecoinLleft} />
-                    <DollarImg  src={dollar} />
-                    <TetherImg src={tether} />
-                    {/* <Image style={{width: "100%"}} src={Illustration}/> */}
-                    <Currency1 src={currency1} />
-                    <Currency2 src={currency2} />
                 </IllustrationBlockRight>
             </IllustrationBlock>
             <SectionBlock id='aboutBlock'>

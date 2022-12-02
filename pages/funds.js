@@ -1,4 +1,5 @@
 import React from 'react';
+import cookie from "cookie";
 import { FundsSection, FundsShadow1, FundsShadow2, FundsText, FundsTitle, SectionBlock, SmallTitleText, TitleText } from '../styles';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Page from '../components/page/page';
@@ -6,9 +7,10 @@ import { ThemeContext } from '../theme/theme';
 import FundsHeader from '../components/fundsHeader/fundsHeader';
 
 
-export async function getStaticProps({ locale }) {
+export async function getServerSideProps({ req, locale }) {
     return {
         props: {
+            _theme: cookie.parse(req.headers.cookie || "").theme || "Light",
             ...(await serverSideTranslations(locale, ['common', 'header'])),
             // Will be passed to the page component as props
         },

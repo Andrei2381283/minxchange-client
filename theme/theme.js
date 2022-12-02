@@ -14,6 +14,6 @@ export const themes = {
 }
 
 export const ThemeContext = React.createContext({
-    theme: themes[typeof localStorage !== 'undefined' && localStorage.getItem("theme") || "light"],
+    theme: themes["light"],
     changeTheme: () => {}
 });

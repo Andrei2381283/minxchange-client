@@ -18,7 +18,7 @@ const ChangeLang = () => {
         <Image src={arrowDown} />
         {isOpen && (
             <ChangeLngList>
-                {langs.map((elem, i) => <ChangeLngElem key={i} href="/" locale={elem}>{elem}</ChangeLngElem>)}
+                {langs.map((elem, i) => <ChangeLngElem key={i} href="" locale={elem}>{elem}</ChangeLngElem>)}
             </ChangeLngList>
         ) || ""}
     </ChangeLngContainer>

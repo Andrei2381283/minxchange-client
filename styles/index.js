@@ -160,9 +160,12 @@ export const Currency1 = styled(Image)`
     height: auto;
     left: 22.875em;
     top: 15.1875em;
-    background: linear-gradient(275.17deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 98.52%);
+    background: ${props => props.theme == "Light" ? 
+    "linear-gradient(275.17deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 98.52%)" : 
+    "linear-gradient(275.17deg, rgba(0, 0, 2, 0.16) 0%, rgba(0, 0, 0, 0.1) 98.52%)"};
     filter: drop-shadow(-4px 5px 14px rgba(85, 117, 109, 0.18));
     backdrop-filter: blur(12.5px);
+    border-radius: 5px;
 `
 
 export const Currency2 = styled(Image)`
@@ -171,9 +174,12 @@ export const Currency2 = styled(Image)`
     height: auto;
     left: 3.6875em;
     top: 8.8125em;
-    background: linear-gradient(275.17deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 98.52%);
+    background: ${props => props.theme == "Light" ? 
+    "linear-gradient(275.17deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 98.52%)" : 
+    "linear-gradient(275.17deg, rgba(0, 0, 2, 0.16) 0%, rgba(0, 0, 0, 0.1) 98.52%)"};
     filter: drop-shadow(5px 14px 14px rgba(85, 117, 109, 0.09));
     backdrop-filter: blur(12.5px);
+    border-radius: 5px;
 `
 
 export const GreenShadow1 = styled.div`
@@ -217,7 +223,7 @@ export const WhiteShadow = styled.div`
         }
     }
     
-    animation: 5.5s opacityAnim_;
+    animation: 0.5s opacityAnim_;
 `
 
 export const SectionBlock = styled.div`
@@ -365,6 +371,7 @@ export const PartnersTitle = styled.h2`
     font-size: 2rem;
     color: #95A8B6;
     font-weight: 400;
+    margin: 0 0 2.5rem;
 `
 
 export const PartnersDiv = styled.div`
@@ -447,4 +454,24 @@ export const FundsShadow2 = styled.div`
     filter: blur(145px);
     z-index: -1;
     animation: none;
+`
+
+export const TradeSection = styled(SectionBlock)`
+    margin-top: 4rem;
+`
+
+export const GPartnersSectionBlock = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 4rem 7em 6rem;
+    background: linear-gradient(270.67deg, #3AD5AD 0.58%, #38E7BA 92.18%);
+    margin-bottom: -13.75rem;
+    margin-top: 4rem;
+`
+
+export const PartnersBtnW = styled(PartnersBtn)`
+    border: 1px solid white;
 `

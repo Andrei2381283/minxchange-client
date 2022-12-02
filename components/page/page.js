@@ -6,12 +6,12 @@ import Header from '../header/header'
 import { GlobalStyle } from '../../styles/globals.js'
 import { ThemeContext, themes } from '../../theme/theme';
 
-function Page({ children }) {
-  const [theme, setTheme] = useState(themes[/* typeof localStorage !== 'undefined' && localStorage.getItem("theme") || */ "light"]);
+function Page({ children, _theme }) {
+  const [theme, setTheme] = useState(themes[_theme.toLowerCase()]);
 
   function changeTheme(theme) {
     setTheme(theme);
-    localStorage.setItem("theme", theme.name.toLowerCase());
+    document.cookie = "theme=" + theme.name + "; path=/";
   }
 
   return (
