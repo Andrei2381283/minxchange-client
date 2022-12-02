@@ -406,7 +406,6 @@ export const FundsSection = styled(SectionBlock)`
     padding: 4rem 12.5rem 4.5rem;
     box-shadow: 18px 15px 21px rgba(149, 168, 182, 0.04);
     border-radius: 5px;
-    /* transition: 0.5s; */
     align-items: flex-start;
 `
 
