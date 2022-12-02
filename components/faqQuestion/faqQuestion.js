@@ -4,41 +4,28 @@ import { FaqQuestionAnswer, FaqQuestionBlock, FaqQuestionPlusBtn, FaqQuestionTit
 const FaqQuestion = ({ style, title, children }) => {
 
     const [isOpen, setOpen] = useState(false);
-    var timeout;
+
+    const [textIsOpen, textSetOpen] = useState(false);
+
     const onClick = function(e){
-        console.log(e);
-        clearTimeout(timeout);
         if(isOpen){
-            const element = e.nativeEvent.path.find((elem) => elem.classList.contains("faq-block")).children[1];
-            element.style.opacity = "0";
-            element.style.marginTop = "0";
-            element.style.height = "0";
-            timeout = setTimeout(() => {
+            if(!textIsOpen)  return;
+            textSetOpen(!isOpen);
+            setTimeout(() => {
                 setOpen(!isOpen);
-            }, 850)
-            return;
+            },200)
+            return
         }
+        textSetOpen(!isOpen);
         setOpen(!isOpen);
     }
-
-    useEffect(() => {
-        Array.prototype.forEach.call(document.getElementsByClassName("faq-answer"), function(elem){
-            console.log(elem.offsetHeight);
-            const height = elem.offsetHeight;
-            elem.style.height = '0';
-            setTimeout(() => {
-                elem.style.opacity = "1";
-                elem.style.height = height + "px";
-            }, 0)
-        });
-    })
 
     return <FaqQuestionBlock className='faq-block' onClick={onClick}>
         <FaqQuestionTopDiv>
             <FaqQuestionTitle>{title}</FaqQuestionTitle>
             <FaqQuestionPlusBtn>+</FaqQuestionPlusBtn>
         </FaqQuestionTopDiv>
-        {isOpen && <FaqQuestionAnswer className='faq-answer'>{children}</FaqQuestionAnswer> || ""}
+        {isOpen && <FaqQuestionAnswer open={isOpen && textIsOpen} className='faq-answer'><span>{children}</span></FaqQuestionAnswer> || ""}
     </FaqQuestionBlock>
 }
 

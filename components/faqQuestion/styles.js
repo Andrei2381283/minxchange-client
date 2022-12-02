@@ -8,6 +8,7 @@ export const FaqQuestionBlock = styled.div`
     transition: 0.5s;
     padding: 2rem;
     padding-left: 0;
+    overflow: hidden;
 `
 
 export const FaqQuestionTopDiv = styled.div`
@@ -33,6 +34,24 @@ export const FaqQuestionTitle = styled.span`
 export const FaqQuestionAnswer = styled.div`
     margin-top: 1rem;
     overflow: hidden;
-    opacity: 0;
-    transition: 0.85s;
+
+    @keyframes qAnim {
+        from {
+            transform: translateX(100%);
+        }
+        to {
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes qAnim2 {
+        from {
+            transform: translateX(0);
+        }
+        to {
+            transform: translateX(100%);
+        }
+    }
+
+    animation: 0.2s ${props => props.open ? "qAnim" : "qAnim2"};
 `

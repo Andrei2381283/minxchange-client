@@ -342,6 +342,7 @@ export const GreenText = styled.span`
 export const FaqBlock = styled.div`
     display: flex;
     justify-content: space-between;
+    width: 100%;
 `
 
 export const FaqBlockImg = styled.div`
@@ -400,6 +401,7 @@ export const FaqQuestionsBlock = styled.div`
     display: flex;
     flex-direction: column;
     margin-left: 7.5rem;
+    width: 100%;
 
     @media (max-width: 998px) {
         margin-left: 0;
