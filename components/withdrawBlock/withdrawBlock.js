@@ -27,9 +27,9 @@ const WithdrawBlock = ({ children, style }) => {
                     <WithdrawBlockDiv theme={theme.name}>
                         <WithdrawBlockDivTitle>Отдаете</WithdrawBlockDivTitle>
                         <WithdrawBlockTopDiv>
-                            <WithdrawBlockBtn selected={giveMode == 0} onClick={changeGiveMode(0)} small >Все</WithdrawBlockBtn>
-                            <WithdrawBlockBtn selected={giveMode == 1} onClick={changeGiveMode(1)} small style={{ marginLeft: "0.5rem" }}>₿</WithdrawBlockBtn>
-                            <WithdrawBlockBtn selected={giveMode == 2} onClick={changeGiveMode(2)} small style={{ marginLeft: "0.5rem" }}>₽</WithdrawBlockBtn>
+                            <WithdrawBlockBtn theme={theme.name} selected={giveMode == 0} onClick={changeGiveMode(0)} small >Все</WithdrawBlockBtn>
+                            <WithdrawBlockBtn theme={theme.name} selected={giveMode == 1} onClick={changeGiveMode(1)} small style={{ marginLeft: "0.5rem" }}>₿</WithdrawBlockBtn>
+                            <WithdrawBlockBtn theme={theme.name} selected={giveMode == 2} onClick={changeGiveMode(2)} small style={{ marginLeft: "0.5rem" }}>₽</WithdrawBlockBtn>
                         </WithdrawBlockTopDiv>
                         <WithdrawBlockSearch theme={theme.name} />
                         <WithdrawBlockBtn theme={theme.name} selected={giveCrypto == 0} onClick={changeGiveCrypto(0)} style={{ marginTop: "1rem" }}>

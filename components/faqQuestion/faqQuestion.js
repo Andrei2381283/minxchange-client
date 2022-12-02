@@ -4,17 +4,18 @@ import { FaqQuestionAnswer, FaqQuestionBlock, FaqQuestionPlusBtn, FaqQuestionTit
 const FaqQuestion = ({ style, title, children }) => {
 
     const [isOpen, setOpen] = useState(false);
-
+    var timeout;
     const onClick = function(e){
         console.log(e);
+        clearTimeout(timeout);
         if(isOpen){
             const element = e.nativeEvent.path.find((elem) => elem.classList.contains("faq-block")).children[1];
             element.style.opacity = "0";
             element.style.marginTop = "0";
             element.style.height = "0";
-            setTimeout(() => {
+            timeout = setTimeout(() => {
                 setOpen(!isOpen);
-            }, 300)
+            }, 850)
             return;
         }
         setOpen(!isOpen);

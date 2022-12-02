@@ -34,5 +34,5 @@ export const FaqQuestionAnswer = styled.div`
     margin-top: 1rem;
     overflow: hidden;
     opacity: 0;
-    transition: 0.3s;
+    transition: 0.85s;
 `

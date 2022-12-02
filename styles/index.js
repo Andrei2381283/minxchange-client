@@ -196,6 +196,11 @@ export const DollarImg = styled(CryptoAnimatedImg)`
         }
     }
     animation-name: vertAnimDollar;
+
+    @media (max-width: 998px) {
+    right: 21em;
+    top: 26.75em;
+    }
 `
 
 export const Currency1 = styled(Image)`
