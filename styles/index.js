@@ -438,7 +438,6 @@ export const FundsShadow1 = styled.div`
     background: #38E7BA;
     opacity: 0.2;
     filter: blur(145px);
-    z-index: -1;
     animation: none;
 `
 
@@ -451,7 +450,6 @@ export const FundsShadow2 = styled.div`
     background: #38E7BA;
     opacity: 0.2;
     filter: blur(145px);
-    z-index: -1;
     animation: none;
 `
 
