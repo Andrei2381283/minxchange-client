@@ -14,8 +14,16 @@ export const LightBtnLink = styled(Link)`
     text-decoration: none;
     border: 1px solid ${props => props.theme == "Light" ? "#162329" : "#38E7BA"};
     cursor: pointer;
+    width: fit-content;
 
     transition: 0.2s;
+
+    ${props => props.$mobileElement ? "display: none" : ""}
+    ${props => props.$pcElement ? `
+        @media (max-width: 998px) {
+            display: none;
+        }
+    ` : ""}
 
     &:hover {
         background: ${props => props.theme == "Light" ? "#162329" : "#38E7BA"};;

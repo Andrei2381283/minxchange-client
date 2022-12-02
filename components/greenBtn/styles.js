@@ -18,6 +18,13 @@ export const GreenBtnLink = styled(Link)`
 
     transition: 0.2s;
 
+    ${props => props.$mobileElement ? "display: none" : ""}
+    ${props => props.$pcElement ? `
+        @media (max-width: 998px) {
+            display: none;
+        }
+    ` : ""}
+
     &:hover {
         background: transparent;
         color: inherit;

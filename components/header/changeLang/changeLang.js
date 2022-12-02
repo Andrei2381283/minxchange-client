@@ -5,7 +5,7 @@ import arrowDown from "../../../assets/arrowDown.svg";
 import { ChangeLngContainer, ChangeLngElem, ChangeLngList } from './styles';
 import nextI18nextConfig from '../../../next-i18next.config';
 
-const ChangeLang = () => {
+const ChangeLang = ({ style, $pcElement, $mobileElement }) => {
 
     const [isOpen, setOpen] = useState(false);
 
@@ -13,7 +13,7 @@ const ChangeLang = () => {
 
     const langs = nextI18nextConfig.i18n.locales;
 
-    return <ChangeLngContainer onClick={() => setOpen(!isOpen)}>
+    return <ChangeLngContainer style={style || {}} $pcElement={$pcElement} $mobileElement={$mobileElement} onClick={() => setOpen(!isOpen)}>
         <span>{i18n.language.toUpperCase()}</span>
         <Image src={arrowDown} />
         {isOpen && (

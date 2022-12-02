@@ -6,7 +6,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import cookie from "cookie";
 
 import Page from '../components/page/page';
-import { AboutDescrText, AboutInfosBlock, AboutInfosDescr, AboutInfosLine, AboutInfosTitle, CardsImage, Currency1, Currency2, DollarImg, FaqBlock, FaqBlockImg, FaqGreenShadow, FaqImg1, FaqImg2, FaqQuestionsBlock, GreenLine, GreenMarkDiv, GreenMarksDiv, GreenMarkSubText, GreenShadow1, GreenShadow2, GreenText, HowWorksDiv, IllustrationBlock, IllustrationBlockLeft, IllustrationBlockRight, LitecoinImg, PartnersBtn, PartnersDiv, PartnersTitle, PayeerImg, ReferalGreenShadow, ReferalLeft, ReferalRight, SectionBlock, SmallTitleText, TetherImg, TitleText, TitleTextH1, WhiteShadow } from '../styles';
+import { AboutDescrText, AboutInfosBlock, AboutInfosDescr, AboutInfosLine, AboutInfosTitle, AboutSectionBlock, CardsImage, Currency1, Currency2, DollarImg, FaqBlock, FaqBlockImg, FaqGreenShadow, FaqImg1, FaqImg2, FaqQuestionsBlock, GreenLine, GreenMarkDiv, GreenMarksDiv, GreenMarkSubText, GreenShadow1, GreenShadow2, GreenText, HowWorksDiv, IllustrationBlock, IllustrationBlockLeft, IllustrationBlockRight, LitecoinImg, PartnersBtn, PartnersDiv, PartnersSection, PartnersTitle, PayeerImg, ReferalGreenShadow, ReferalLeft, ReferalRight, SectionBlock, SmallTitleText, TetherImg, TitleText, TitleTextH1, WhiteShadow } from '../styles';
 import Image from 'next/image';
 import GreenBtn from '../components/greenBtn/greenBtn';
 import WhyUsText from '../components/whyUsText/whyUsText';
@@ -96,9 +96,9 @@ export default function Home(props) {
                     </ThemeContext.Consumer>
                 </IllustrationBlockRight>
             </IllustrationBlock>
-            <SectionBlock id='aboutBlock'>
+            <AboutSectionBlock id='aboutBlock'>
                 <SmallTitleText style={{ fontSize: "4em" }}>“</SmallTitleText>
-                <AboutDescrText>Каждый день мы стараеся делать покупку и продажу криптовалюты доступным для каждого пользователя.<br />MintExchange предлагает удобное решение для обмена криптовалюты и вывода средтв на Вашу банковскую карту</AboutDescrText>
+                <AboutDescrText>Каждый день мы стараемся делать покупку и продажу криптовалюты доступным для каждого пользователя.<br />MintExchange предлагает удобное решение для обмена криптовалюты и вывода средтв на Вашу банковскую карту</AboutDescrText>
                 <AboutInfosBlock>
                     <div>
                         <AboutInfosTitle>$1 млрд</AboutInfosTitle>
@@ -120,7 +120,7 @@ export default function Home(props) {
                         <AboutInfosDescr>поддерживаемых криптовалют</AboutInfosDescr>
                     </div>
                 </AboutInfosBlock>
-            </SectionBlock>
+            </AboutSectionBlock>
             <SectionBlock id='whyUsBlock'>
                 <SmallTitleText>Мы лучшие в своём деле</SmallTitleText>
                 <TitleText>Почему мы?</TitleText>
@@ -188,7 +188,7 @@ export default function Home(props) {
             <SectionBlock style={{flexDirection: "row", justifyContent: "space-between"}}>
                 <ReferalLeft>
                     <SmallTitleText>Реферальная программа</SmallTitleText>
-                    <TitleText style={{marginTop: "1rem", marginBottom: "2rem"}}>Приглашайте друзей</TitleText>
+                    <TitleText style={{marginTop: "1rem", marginBottom: "2rem", textAlign: "left"}}>Приглашайте друзей</TitleText>
                     <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique ornare quam commodo magna. Convallis ullamcorper nulla nibh et turpis suspendisse aliquam. Quam massa cursus scelerisque fringilla quam quisque nunc. Hac tempor cursus maecenas in suscipit. </span>
                     <GreenBtn style={{marginTop: "3.5rem"}}>Пригласить</GreenBtn>
                 </ReferalLeft>
@@ -197,7 +197,7 @@ export default function Home(props) {
                     <Image style={{ width: "41.6875rem", height: "auto" }} src={referalImg} />
                 </ReferalRight>
             </SectionBlock>
-            <SectionBlock>
+            <PartnersSection>
                 <PartnersTitle>Партнеры</PartnersTitle>
                 <PartnersDiv>
                     <PartnersBtn>
@@ -210,7 +210,7 @@ export default function Home(props) {
                         <Image src={partnersArrow} />
                     </PartnersBtn>
                 </PartnersDiv>
-            </SectionBlock>
+            </PartnersSection>
         </Page>
     )
 }

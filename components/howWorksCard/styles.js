@@ -12,6 +12,10 @@ export const HowWorksCardDiv = styled.div`
     border-radius: 3px;
     max-width: 285px;
     position: relative;
+
+    @media (max-width: 998px) {
+        margin: 8px 0 !important;
+    }
 `
 
 export const HowWorksCardTitle = styled.span`

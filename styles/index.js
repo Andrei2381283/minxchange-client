@@ -1,16 +1,38 @@
 import styled from "styled-components";
 import Image from 'next/image';
 
+
+export const SectionBlock = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin: 7.5em 7em 0;
+    align-items: center;
+    position: relative;
+
+    @media (max-width: 998px) {
+        margin: 7.5em 16px 0;
+    }
+`
+
 export const TitleTextH1 = styled.h1`
     font-weight: 600;
     font-size: 4em;
     margin: 1.5rem 0 4rem;
+
+    @media (max-width: 998px) {
+        font-size: 32px;
+    }
 `
 
 export const TitleText = styled.h2`
     font-weight: 600;
     font-size: 4em;
     margin: 0.5rem 0 4.5rem;
+
+    @media (max-width: 998px) {
+        text-align: center;
+        font-size: 32px;
+    }
 `
 
 export const SmallTitleText = styled.span`
@@ -22,6 +44,10 @@ export const SmallTitleText = styled.span`
 export const IllustrationBlock  = styled.section`
     margin: 3rem 7em 0;
     display: flex;
+    
+    @media (max-width: 998px) {
+        margin: 3rem 16px 0;
+    }
 `
 
 export const IllustrationBlockLeft  = styled.div`
@@ -30,6 +56,10 @@ export const IllustrationBlockLeft  = styled.div`
     /* width: 100%; */
     margin-right: 4rem;
     margin-left: auto;
+
+    @media (max-width: 998px) {
+        margin: 0;
+    }
 `
 
 export const IllustrationBlockRight  = styled.div`
@@ -37,7 +67,21 @@ export const IllustrationBlockRight  = styled.div`
     min-height: 33.3125em;
     position: relative;
     margin-right: auto;
+
+    @media (max-width: 998px) {
+        position: absolute;
+        margin-top: 220px;
+        right: -80px;
+        max-width: 100vw;
+        font-size: 10px;
+    }
     /* font-size: 0.95em; */
+`
+
+export const AboutSectionBlock = styled(SectionBlock)`
+    @media (max-width: 998px) {
+        margin-top: 270px;
+    }
 `
 
 export const GreenMarksDiv = styled.div`
@@ -226,14 +270,6 @@ export const WhiteShadow = styled.div`
     animation: 0.5s opacityAnim_;
 `
 
-export const SectionBlock = styled.div`
-    display: flex;
-    flex-direction: column;
-    margin: 7.5em 7em 0;
-    align-items: center;
-    position: relative;
-`
-
 export const AboutDescrText = styled.h3`
     font-weight: 400;
     font-size: 2em;
@@ -248,12 +284,20 @@ export const AboutInfosBlock = styled.div`
     width: 100%;
     max-width: 1200px;
     margin: 4em auto 0;
+
+    @media (max-width: 998px) {
+        flex-direction: column;
+    }
 `
 
 export const AboutInfosLine = styled.div`
     width: 2px;
     background: rgba(85, 117, 109, 0.07);
     border-radius: 5px;
+
+    @media (max-width: 998px) {
+        margin: 8px 0;
+    }
 `
 
 export const AboutInfosTitle = styled.div`
@@ -280,6 +324,10 @@ export const CardsImage = styled(Image)`
 
 export const HowWorksDiv = styled.div`
     display: flex;
+
+    @media (max-width: 998px) {
+        flex-direction: column;
+    }
 `
 
 export const GreenText = styled.span`
@@ -293,6 +341,10 @@ export const FaqBlock = styled.div`
 
 export const FaqBlockImg = styled.div`
     position: relative;
+
+    @media (max-width: 998px) {
+        display: none;
+    }
 `
 
 export const FaqImg1 = styled(Image)`
@@ -343,16 +395,27 @@ export const FaqQuestionsBlock = styled.div`
     display: flex;
     flex-direction: column;
     margin-left: 7.5rem;
+
+    @media (max-width: 998px) {
+        margin-left: 0;
+    }
 `
 
 export const ReferalLeft = styled.div`
     display: flex;
-    flex-direction: column  ;
+    flex-direction: column;
+    z-index: 10;
 `
 
 export const ReferalRight = styled.div`
     display: flex;
     position: relative;
+
+    @media (max-width: 998px) {
+        position: absolute;
+        margin-top: 520px;
+        right: -200px;
+    }
 `
 
 export const ReferalGreenShadow = styled.div`
@@ -367,6 +430,12 @@ export const ReferalGreenShadow = styled.div`
     z-index: -1;
 `
 
+export const PartnersSection = styled(SectionBlock)`
+    @media (max-width: 998px) {
+        margin-top: 350px;
+    }
+`
+
 export const PartnersTitle = styled.h2`
     font-size: 2rem;
     color: #95A8B6;
@@ -379,6 +448,13 @@ export const PartnersDiv = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100%;
+
+    @media (max-width: 998px) {
+        flex-direction: column;
+        & > * {
+            margin: 16px 0;
+        }
+    }
 `
 
 export const PartnersBtn = styled.button`
@@ -399,6 +475,10 @@ export const PartnersBtn = styled.button`
         margin-left: 1.25rem;
         rotate: 180deg;
     }
+
+    @media (max-width: 998px) {
+        display: none;
+    }
 `
 
 export const FundsSection = styled(SectionBlock)`
@@ -407,6 +487,12 @@ export const FundsSection = styled(SectionBlock)`
     box-shadow: 18px 15px 21px rgba(149, 168, 182, 0.04);
     border-radius: 5px;
     align-items: flex-start;
+
+    @media (max-width: 998px) {
+        margin-top: 24px;
+        padding: 16px;
+        width: 100%;
+    }
 `
 
 export const FundsTitle = styled.h3`
@@ -439,6 +525,10 @@ export const FundsShadow1 = styled.div`
     opacity: 0.2;
     filter: blur(145px);
     animation: none;
+
+    @media (max-width: 998px) {
+        display: none;
+    }
 `
 
 export const FundsShadow2 = styled.div`
@@ -451,6 +541,10 @@ export const FundsShadow2 = styled.div`
     opacity: 0.2;
     filter: blur(145px);
     animation: none;
+
+    @media (max-width: 998px) {
+        display: none;
+    }
 `
 
 export const TradeSection = styled(SectionBlock)`

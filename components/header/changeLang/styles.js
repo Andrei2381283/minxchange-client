@@ -4,12 +4,23 @@ import styled from "styled-components";
 export const ChangeLngContainer = styled.div`
     display: flex;
     align-items: center;
-    margin-left: 3em;
+    margin-left: 3rem;
     width: 32px;
     justify-content: space-between;
     cursor: pointer;
     user-select: none;
     position: relative;
+
+    ${props => props.$mobileElement ? "display: none" : ""}
+    ${props => props.$pcElement ? `
+        @media (max-width: 998px) {
+            display: none;
+        }
+    ` : ""}
+
+    @media (max-width: 998px) {
+        font-size: 18px;
+    }
 `
 
 export const ChangeLngList = styled.div`

@@ -4,6 +4,10 @@ import styled from "styled-components";
 export const WithdrawBlockContainer = styled.div`
     display: flex;
     margin-top: 3.5rem;
+
+    @media (max-width: 998px) {
+        flex-direction: column;
+    }
 `
 //${props => props.theme == "Light" ? "" : ""}
 export const WithdrawBlockDiv = styled.div`
@@ -18,6 +22,14 @@ export const WithdrawBlockDiv = styled.div`
 
     &:not(:first-of-type){
         margin-left: 1.25rem;
+    }
+
+    @media (max-width: 998px) {
+        margin-left: 0 !important;
+
+        &:not(:first-of-type){
+            margin-top: 60px;
+        }
     }
 `
 

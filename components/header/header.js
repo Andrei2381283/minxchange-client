@@ -3,20 +3,25 @@ import { useTranslation } from 'next-i18next';
 import { ThemeContext, themes } from '../../theme/theme';
 import Logo from '../logo/logo';
 import ChangeLang from './changeLang/changeLang';
-import { HeaderContainer, HeaderLink, HeaderThemeContainer, HeaderThemePoint } from "./styles";
+import { HeaderContainer, HeaderLink, HeaderMobileMenu, HeaderMobileMenuLine, HeaderThemeContainer, HeaderThemePoint } from "./styles";
 import GreenBtn from '../greenBtn/greenBtn';
 import LightBtn from '../lightBtn/lightBtn';
 
-const Header = () => {
+const Header = ({ isMobileMenuVisible, setMobileMenuVisible }) => {
 
     const { t, i18n } = useTranslation("header");
     
     return <HeaderContainer>
+        <HeaderMobileMenu onClick={() => setMobileMenuVisible(!isMobileMenuVisible)} >
+            <HeaderMobileMenuLine />
+            <HeaderMobileMenuLine />
+            <HeaderMobileMenuLine />
+        </HeaderMobileMenu>
         <Logo isLink />
-        <HeaderLink scroll={false} href="/#aboutBlock">{t("about")}</HeaderLink>
-        <HeaderLink scroll={false} href="/#whyUsBlock">{t("why")}</HeaderLink>
-        <HeaderLink scroll={false} href="/#howItWorksBlock">{t("how-works")}</HeaderLink>
-        <HeaderLink href="/funds">{t("withdraw")}</HeaderLink>
+        <HeaderLink $pcElement scroll={false} href="/#aboutBlock">{t("about")}</HeaderLink>
+        <HeaderLink $pcElement scroll={false} href="/#whyUsBlock">{t("why")}</HeaderLink>
+        <HeaderLink $pcElement scroll={false} href="/#howItWorksBlock">{t("how-works")}</HeaderLink>
+        <HeaderLink $pcElement href="/funds">{t("withdraw")}</HeaderLink>
         <ThemeContext.Consumer>
             {({theme, changeTheme}) => 
             <>
@@ -28,8 +33,8 @@ const Header = () => {
             }
         </ThemeContext.Consumer>
         <ChangeLang />
-        <GreenBtn small={true} style={{marginLeft: "2.5em"}}>{t("reg", {ns: "common"})}</GreenBtn>
-        <LightBtn style={{marginLeft: "0.5em"}}>{t("login", {ns: "common"})}</LightBtn>
+        <GreenBtn $pcElement small={true} style={{marginLeft: "2.5em"}}>{t("reg", {ns: "common"})}</GreenBtn>
+        <LightBtn $pcElement style={{marginLeft: "0.5em"}}>{t("login", {ns: "common"})}</LightBtn>
     </HeaderContainer>
 }
 

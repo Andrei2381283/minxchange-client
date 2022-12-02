@@ -10,6 +10,11 @@ export const FooterContainer = styled.footer`
     color: white;
     display: flex;
     margin-top: 13.75rem;
+
+    @media (max-width: 998px) {
+        flex-direction: column;
+        padding: 16px;
+    }
 `
 
 export const FooterLinksDiv = styled.nav`
@@ -21,6 +26,12 @@ export const FooterLinksDiv = styled.nav`
 
     &:first-of-type {
         margin-left: auto;
+    }
+
+    @media (max-width: 998px) {
+        margin-left: 3rem !important;
+        margin-top: 20px;
+        font-size: 18px;
     }
 `
 
