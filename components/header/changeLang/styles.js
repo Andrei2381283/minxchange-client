@@ -34,6 +34,8 @@ export const ChangeLngList = styled.div`
     text-transform: uppercase;
     min-width: 100%;
     text-align: center;
+    z-index: 10;
+    background: ${props => props.theme.bg};
 `
 
 export const ChangeLngElem = styled(Link)`
