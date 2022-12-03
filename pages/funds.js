@@ -5,37 +5,41 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Page from '../components/page/page';
 import { ThemeContext } from '../theme/theme';
 import FundsHeader from '../components/fundsHeader/fundsHeader';
+import { useTranslation } from 'next-i18next';
 
 
 export async function getServerSideProps({ req, locale }) {
     return {
         props: {
             _theme: cookie.parse(req.headers.cookie || "").theme || "Light",
-            ...(await serverSideTranslations(locale, ['common', 'header'])),
+            ...(await serverSideTranslations(locale)),
             // Will be passed to the page component as props
         },
     };
 }
 
 export default function Funds(props) {
+
+    const { t, i18n } = useTranslation("funds");
+
     return (
         <Page {...props}>
             <SectionBlock>
-                <SmallTitleText>Мы лучшие в своём деле</SmallTitleText>
-                <TitleText>Ввод и вывод средств</TitleText>
+                <SmallTitleText>{t("fundsSmallTitle")}</SmallTitleText>
+                <TitleText>{t("fundsTitle")}</TitleText>
                 <ThemeContext.Consumer>
                     {({ theme }) => (
                         <>
                             <FundsShadow1 />
                             <FundsShadow2 />
                             <FundsSection theme={theme.name}>
-                                <FundsTitle>Условия и правила платежей Mintxchange</FundsTitle>
-                                <FundsHeader number={1}>Платежи</FundsHeader>
-                                <FundsText>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fringilla non augue dolor adipiscing. Turpis tempor egestas purus neque, pulvinar amet. Quis rutrum lectus placerat egestas. Nulla fermentum dignissim sed sed elementum, fermentum erat tortor enim. Eget sagittis, id non lorem. Aliquam, pulvinar nulla massa ullamcorper quam et proin laoreet habitant. Ac dolor enim a faucibus risus dui. Sit sagittis accumsan nam arcu nunc auctor convallis velit. A urna viverra pulvinar mauris aliquam.</FundsText>
-                                <FundsText>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fringilla non augue dolor adipiscing. Turpis tempor egestas purus neque, pulvinar amet. Quis rutrum lectus placerat egestas. Nulla fermentum dignissim sed sed elementum, fermentum erat tortor enim. Eget sagittis, id non lorem. Aliquam, pulvinar nulla massa ullamcorper quam et proin laoreet habitant. Ac dolor enim a faucibus risus dui. Sit sagittis accumsan nam arcu nunc auctor convallis velit. A urna viverra pulvinar mauris aliquam.</FundsText>
-                                <FundsHeader number={2}>Комиссии</FundsHeader>
-                                <FundsText>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fringilla non augue dolor adipiscing. Turpis tempor egestas purus neque, pulvinar amet. Quis rutrum lectus placerat egestas. Nulla fermentum dignissim sed sed elementum, fermentum erat tortor enim. Eget sagittis, id non lorem. Aliquam, pulvinar nulla massa ullamcorper quam et proin laoreet habitant. Ac dolor enim a faucibus risus dui. Sit sagittis accumsan nam arcu nunc auctor convallis velit. A urna viverra pulvinar mauris aliquam.</FundsText>
-                                <FundsText>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fringilla non augue dolor adipiscing. Turpis tempor egestas purus neque, pulvinar amet. Quis rutrum lectus placerat egestas. Nulla fermentum dignissim sed sed elementum, fermentum erat tortor enim. Eget sagittis, id non lorem. Aliquam, pulvinar nulla massa ullamcorper quam et proin laoreet habitant. Ac dolor enim a faucibus risus dui. Sit sagittis accumsan nam arcu nunc auctor convallis velit. A urna viverra pulvinar mauris aliquam.</FundsText>
+                                <FundsTitle>{t("fundsTitle2")}</FundsTitle>
+                                <FundsHeader number={1}>{t("fundsSectionHeader1")}</FundsHeader>
+                                <FundsText>{t("fundsText1")}</FundsText>
+                                <FundsText>{t("fundsText2")}</FundsText>
+                                <FundsHeader number={2}>{t("fundsSectionHeader2")}</FundsHeader>
+                                <FundsText>{t("fundsText3")}</FundsText>
+                                <FundsText>{t("fundsText4")}</FundsText>
                             </FundsSection>
                         </>
                     )}

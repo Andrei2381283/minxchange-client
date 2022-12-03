@@ -10,27 +10,31 @@ import partnersArrowW from "../assets/partnersArrowW.svg";
 import bestchangeW from "../assets/bestchangeW.svg";
 import binanceW from "../assets/binanceW.svg";
 import blockchainW from "../assets/blockchainW.svg";
+import { useTranslation } from 'next-i18next';
 
 
 export async function getServerSideProps({ req, locale }) {
     return {
         props: {
             _theme: cookie.parse(req.headers.cookie || "").theme || "Light",
-            ...(await serverSideTranslations(locale, ['common', 'header'])),
+            ...(await serverSideTranslations(locale)),
             // Will be passed to the page component as props
         },
     };
 }
 
 export default function Funds(props) {
+
+    const { t, i18n } = useTranslation("index");
+
     return (
         <Page {...props}>
             <TradeSection>
-                <TitleTextH1 style={{fontSize:"2rem"}}>Обменник криптовалют</TitleTextH1>
+                <TitleTextH1 style={{fontSize:"2rem"}}>{t("tradeTitle")}</TitleTextH1>
                 <WithdrawBlock />
             </TradeSection>
             <GPartnersSectionBlock>
-                <PartnersTitle style={{color: "white"}}>Партнеры</PartnersTitle>
+                <PartnersTitle style={{color: "white"}}>{t("partners")}</PartnersTitle>
                 <PartnersDiv>
                     <PartnersBtnW>
                         <Image src={partnersArrowW} />

@@ -4,7 +4,7 @@ import { HowWorksCardDiv,  HowWorksCardDescr, HowWorksCardNum, HowWorksCardTitle
 import { PlanCardDescr } from './styles';
 import ImageGreenLight from '../imageGreenLight/imageGreenLight';
 
-const PlanCard = ({ style, number, image, title, children }) => {
+const PlanCard = ({ style, image, children }) => {
 
     return <ThemeContext.Consumer>
         {({theme}) => (

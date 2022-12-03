@@ -5,8 +5,11 @@ import btc from "../../assets/btc.svg";
 import exchange from "../../assets/exchange.svg";
 import WithdrawBlockSearch from './withdrawBlockSearch/withdrawBlockSearch';
 import { ThemeContext } from '../../theme/theme';
+import { useTranslation } from 'next-i18next';
 
 const WithdrawBlock = ({ children, style }) => {
+
+    const { t, i18n } = useTranslation("index");
 
     const [giveMode, setGiveMode] = useState(0);
     const changeGiveMode = (mode) => () => setGiveMode(mode);
@@ -25,7 +28,7 @@ const WithdrawBlock = ({ children, style }) => {
             {({ theme }) => (
                 <>
                     <WithdrawBlockDiv theme={theme.name}>
-                        <WithdrawBlockDivTitle>Отдаете</WithdrawBlockDivTitle>
+                        <WithdrawBlockDivTitle>{t("give")}</WithdrawBlockDivTitle>
                         <WithdrawBlockTopDiv>
                             <WithdrawBlockBtn theme={theme.name} selected={giveMode == 0} onClick={changeGiveMode(0)} small >Все</WithdrawBlockBtn>
                             <WithdrawBlockBtn theme={theme.name} selected={giveMode == 1} onClick={changeGiveMode(1)} small style={{ marginLeft: "0.5rem" }}>₿</WithdrawBlockBtn>
@@ -88,7 +91,7 @@ const WithdrawBlock = ({ children, style }) => {
                         </WithdrawBlockBtn>
                     </WithdrawBlockDiv>
                     <WithdrawBlockDiv theme={theme.name}>
-                        <WithdrawBlockDivTitle>Получаете</WithdrawBlockDivTitle>
+                        <WithdrawBlockDivTitle>{t("get")}</WithdrawBlockDivTitle>
                         <WithdrawBlockTopDiv>
                             <WithdrawBlockBtn theme={theme.name} selected={getMode == 0} onClick={changeGetMode(0)} small >Все</WithdrawBlockBtn>
                             <WithdrawBlockBtn theme={theme.name} selected={getMode == 1} onClick={changeGetMode(1)} small style={{ marginLeft: "0.5rem" }}>₿</WithdrawBlockBtn>
@@ -146,7 +149,7 @@ const WithdrawBlock = ({ children, style }) => {
                         </WithdrawBlockBtn>
                     </WithdrawBlockDiv>
                     <WithdrawBlockDiv theme={theme.name}>
-                        <WithdrawBlockDivTitle>Последние обмены</WithdrawBlockDivTitle>
+                        <WithdrawBlockDivTitle>{t("trades")}</WithdrawBlockDivTitle>
                         <WithdrawBlockBtn theme={theme.name}>
                             <WithdrawBlockBtn3div>
                                 <WithdrawBlockBtn3divdiv>

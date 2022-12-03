@@ -4,6 +4,8 @@ import { ThemeContext, themes } from '../theme/theme';
 import Header from '../components/header/header'; */
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import cookie from "cookie";
+import { useTranslation } from 'next-i18next';
+import parseHTML from "html-react-parser";
 
 import Page from '../components/page/page';
 import { AboutDescrText, AboutInfosBlock, AboutInfosDescr, AboutInfosLine, AboutInfosTitle, AboutSectionBlock, CardsImage, Currency1, Currency2, DollarImg, FaqBlock, FaqBlockImg, FaqGreenShadow, FaqImg1, FaqImg2, FaqQuestionsBlock, GreenLine, GreenMarkDiv, GreenMarksDiv, GreenMarkSubText, GreenShadow1, GreenShadow2, GreenText, HowWorksDiv, IllustrationBlock, IllustrationBlockLeft, IllustrationBlockRight, LitecoinImg, PartnersBtn, PartnersDiv, PartnersSection, PartnersTitle, PayeerImg, ReferalGreenShadow, ReferalLeft, ReferalRight, SectionBlock, SmallTitleText, TetherImg, TitleText, TitleTextH1, WhiteShadow } from '../styles';
@@ -39,6 +41,7 @@ import partnersArrow from "../assets/partnersArrow.svg";
 import bestchange from "../assets/bestchange.svg";
 import binance from "../assets/binance.svg";
 import blockchain from "../assets/blockchain.svg";
+import replaceStrToJsx from '../utils/replaceStrToJsx';
 
 
 
@@ -46,36 +49,39 @@ export async function getServerSideProps({ req, locale }) {
     return {
         props: {
             _theme: cookie.parse(req.headers.cookie || "").theme || "Light",
-            ...(await serverSideTranslations(locale, ['common', 'header'])),
+            ...(await serverSideTranslations(locale/* , ['common', 'header'] */)),
             // Will be passed to the page component as props
         },
     };
 }
 
 export default function Home(props) {
+
+    const { t, i18n } = useTranslation("index");
+
     return (
         <Page {...props}>
             <IllustrationBlock>
                 <IllustrationBlockLeft>
-                    <SmallTitleText>Обмен, доступный каждому</SmallTitleText>
-                    <TitleTextH1>Новый  подход к обмену валют</TitleTextH1>
+                    <SmallTitleText>{t("illustartionSmallTitle")}</SmallTitleText>
+                    <TitleTextH1>{t("illustartionTitle")}</TitleTextH1>
                     <GreenMarksDiv>
                         <GreenMarkDiv>
                             <Image src={greenMark} alt="" />
-                            <GreenMarkSubText>Меняй по выгодному курсу</GreenMarkSubText>
+                            <GreenMarkSubText>{t("illustrationMark1")}</GreenMarkSubText>
                         </GreenMarkDiv>
                         <GreenLine />
                         <GreenMarkDiv>
                             <Image src={greenMark} alt="" />
-                            <GreenMarkSubText>Пополняй удобным доступным способом</GreenMarkSubText>
+                            <GreenMarkSubText>{t("illustrationMark2")}</GreenMarkSubText>
                         </GreenMarkDiv>
                         <GreenLine />
                         <GreenMarkDiv>
                             <Image src={greenMark} alt="" />
-                            <GreenMarkSubText>Выводи на банковский счет</GreenMarkSubText>
+                            <GreenMarkSubText>{t("illustrationMark3")}</GreenMarkSubText>
                         </GreenMarkDiv>
                     </GreenMarksDiv>
-                    <GreenBtn style={{ marginTop: "7em" }}>Начать</GreenBtn>
+                    <GreenBtn style={{ marginTop: "7em" }}>{t("start", {ns: "common"})}</GreenBtn>
                 </IllustrationBlockLeft>
                 <IllustrationBlockRight>
                     <ThemeContext.Consumer>
@@ -98,74 +104,74 @@ export default function Home(props) {
             </IllustrationBlock>
             <AboutSectionBlock id='aboutBlock'>
                 <SmallTitleText style={{ fontSize: "4em" }}>“</SmallTitleText>
-                <AboutDescrText>Каждый день мы стараемся делать покупку и продажу криптовалюты доступным для каждого пользователя.<br />MintExchange предлагает удобное решение для обмена криптовалюты и вывода средтв на Вашу банковскую карту</AboutDescrText>
+                <AboutDescrText>{parseHTML(t("aboutTitle"))}</AboutDescrText>
                 <AboutInfosBlock>
                     <div>
-                        <AboutInfosTitle>$1 млрд</AboutInfosTitle>
-                        <AboutInfosDescr>сумма операций ежемесячно</AboutInfosDescr>
+                        <AboutInfosTitle>{t("aboutItem1Title")}</AboutInfosTitle>
+                        <AboutInfosDescr>{t("aboutItem1")}</AboutInfosDescr>
                     </div>
                     <AboutInfosLine />
                     <div>
-                        <AboutInfosTitle>3 млн +</AboutInfosTitle>
-                        <AboutInfosDescr>пользователей по всему миру</AboutInfosDescr>
+                        <AboutInfosTitle>{t("aboutItem2Title")}</AboutInfosTitle>
+                        <AboutInfosDescr>{t("aboutItem2")}</AboutInfosDescr>
                     </div>
                     <AboutInfosLine />
                     <div>
-                        <AboutInfosTitle>200+</AboutInfosTitle>
-                        <AboutInfosDescr>обслуживаемых юрисдикций</AboutInfosDescr>
+                        <AboutInfosTitle>{t("aboutItem3Title")}</AboutInfosTitle>
+                        <AboutInfosDescr>{t("aboutItem3")}</AboutInfosDescr>
                     </div>
                     <AboutInfosLine />
                     <div>
-                        <AboutInfosTitle>50+</AboutInfosTitle>
-                        <AboutInfosDescr>поддерживаемых криптовалют</AboutInfosDescr>
+                        <AboutInfosTitle>{t("aboutItem4Title")}</AboutInfosTitle>
+                        <AboutInfosDescr>{t("aboutItem4")}</AboutInfosDescr>
                     </div>
                 </AboutInfosBlock>
             </AboutSectionBlock>
             <SectionBlock id='whyUsBlock'>
-                <SmallTitleText>Мы лучшие в своём деле</SmallTitleText>
-                <TitleText>Почему мы?</TitleText>
-                <WhyUsText style={{ top: "11.875em", left: "6.32%" }}>Одни из лучших курсов обмена</WhyUsText>
-                <WhyUsText style={{ top: "16.875em", left: "2.53%" }}>Низкие комиссии</WhyUsText>
-                <WhyUsText style={{ top: "21.875em", left: "0" }}>Партнерская программа</WhyUsText>
-                <WhyUsText style={{ top: "26.875em", left: "2.53%" }}>Онлайн поддержка</WhyUsText>
-                <WhyUsText style={{ top: "31.875em", left: "6.32%" }}>Сервис доступен каждому</WhyUsText>
-                <WhyUsText style={{ top: "11.875em", left: "72.344%" }}>Обмен онлайн без рисков</WhyUsText>
-                <WhyUsText style={{ top: "16.875em", left: "74.873%" }}>Скорость операции</WhyUsText>
-                <WhyUsText style={{ top: "21.875em", left: "78.667%" }}>Конфиденциальность</WhyUsText>
-                <WhyUsText style={{ top: "26.875em", left: "74.873%" }}>Простота</WhyUsText>
-                <WhyUsText style={{ top: "31.875em", left: "72.344%" }}>Работы с банковским переводами</WhyUsText>
+                <SmallTitleText>{t("whyUsSmallTitle")}</SmallTitleText>
+                <TitleText>{t("whyUsTitle")}</TitleText>
+                <WhyUsText style={{ top: "11.875em", left: "6.32%" }}>{t("whyUs1")}</WhyUsText>
+                <WhyUsText style={{ top: "16.875em", left: "2.53%" }}>{t("whyUs2")}</WhyUsText>
+                <WhyUsText style={{ top: "21.875em", left: "0" }}>{t("whyUs3")}</WhyUsText>
+                <WhyUsText style={{ top: "26.875em", left: "2.53%" }}>{t("whyUs4")}</WhyUsText>
+                <WhyUsText style={{ top: "31.875em", left: "6.32%" }}>{t("whyUs5")}</WhyUsText>
+                <WhyUsText style={{ top: "11.875em", left: "72.344%" }}>{t("whyUs6")}</WhyUsText>
+                <WhyUsText style={{ top: "16.875em", left: "74.873%" }}>{t("whyUs7")}</WhyUsText>
+                <WhyUsText style={{ top: "21.875em", left: "78.667%" }}>{t("whyUs8")}</WhyUsText>
+                <WhyUsText style={{ top: "26.875em", left: "74.873%" }}>{t("whyUs9")}</WhyUsText>
+                <WhyUsText style={{ top: "31.875em", left: "72.344%" }}>{t("whyUs10")}</WhyUsText>
                 <CardsImage src={cards} alt="Cards" />
-                <GreenBtn>Начать</GreenBtn>
+                <GreenBtn>{t("start", {ns: "common"})}</GreenBtn>
             </SectionBlock>
             <SectionBlock id='howItWorksBlock'>
-                <SmallTitleText>Последовательность</SmallTitleText>
-                <TitleText>Как это работает?</TitleText>
+                <SmallTitleText>{t("howItWorksSmallTitle")}</SmallTitleText>
+                <TitleText>{t("howItWorksTitle")}</TitleText>
                 <HowWorksDiv>
-                    <HowWorksCard number="1" image={howWorks1} title="Регистрация">Пройдите  процедуру регистрации и верификации личности.</HowWorksCard>
-                    <HowWorksCard style={{ marginLeft: "1em" }} number="2" image={howWorks1} title="Регистрация">Пройдите  процедуру регистрации и верификации личности.</HowWorksCard>
-                    <HowWorksCard style={{ marginLeft: "1em" }} number="3" image={howWorks1} title="Регистрация">Пройдите  процедуру регистрации и верификации личности.</HowWorksCard>
-                    <HowWorksCard style={{ marginLeft: "1em" }} number="4" image={howWorks1} title="Регистрация">Пройдите  процедуру регистрации и верификации личности.</HowWorksCard>
+                    <HowWorksCard number="1" image={howWorks1} title="Регистрация">{t("howItWorks1")}</HowWorksCard>
+                    <HowWorksCard style={{ marginLeft: "1em" }} number="2" image={howWorks1} title="Регистрация">{t("howItWorks2")}</HowWorksCard>
+                    <HowWorksCard style={{ marginLeft: "1em" }} number="3" image={howWorks1} title="Регистрация">{t("howItWorks3")}</HowWorksCard>
+                    <HowWorksCard style={{ marginLeft: "1em" }} number="4" image={howWorks1} title="Регистрация">{t("howItWorks4")}</HowWorksCard>
                 </HowWorksDiv>
             </SectionBlock>
-            <SectionBlock id='withdrawBlock'>
-                <SmallTitleText>Попробуйте</SmallTitleText>
-                <TitleText>Обменник криптовалют</TitleText>
+            <SectionBlock>
+                <SmallTitleText>{t("tradeSmallTitle")}</SmallTitleText>
+                <TitleText>{t("tradeTitle")}</TitleText>
                 <WithdrawBlock />
-                <GreenBtn style={{marginTop: "4rem"}}>Начать</GreenBtn>
+                <GreenBtn style={{marginTop: "4rem"}}>{t("start", {ns: "common"})}</GreenBtn>
             </SectionBlock>
             <SectionBlock>
-                <SmallTitleText>в ближайшее время</SmallTitleText>
-                <TitleText>План по развитию</TitleText>
+                <SmallTitleText>{t("soonSmallTitle")}</SmallTitleText>
+                <TitleText>{t("soonTitle")}</TitleText>
                 <HowWorksDiv>
-                    <PlanCard image={howWorks1}>Выводите средства, пополняйте криптокошельки с помощью наших <GreenText>банкоматов</GreenText></PlanCard>
-                    <PlanCard style={{ marginLeft: "1em" }} image={howWorks1}>Выводите средства, пополняйте криптокошельки с помощью наших <GreenText>банкоматов</GreenText></PlanCard>
-                    <PlanCard style={{ marginLeft: "1em" }} image={howWorks1}>Выводите средства, пополняйте криптокошельки с помощью наших <GreenText>банкоматов</GreenText></PlanCard>
-                    <PlanCard style={{ marginLeft: "1em" }} image={howWorks1}>Выводите средства, пополняйте криптокошельки с помощью наших <GreenText>банкоматов</GreenText></PlanCard>
+                    <PlanCard image={howWorks1}>{parseHTML(t("soon1").replace(/\/GreenText/g, "div").replace(/GreenText/g, "div style='color: #27BE98;'"))}</PlanCard>
+                    <PlanCard style={{ marginLeft: "1em" }} image={howWorks1}>{parseHTML(t("soon2").replace(/\/GreenText/g, "div").replace(/GreenText/g, "div style='color: #27BE98;'"))}</PlanCard>
+                    <PlanCard style={{ marginLeft: "1em" }} image={howWorks1}>{parseHTML(t("soon3").replace(/\/GreenText/g, "div").replace(/GreenText/g, "div style='color: #27BE98;'"))}</PlanCard>
+                    <PlanCard style={{ marginLeft: "1em" }} image={howWorks1}>{parseHTML(t("soon4").replace(/\/GreenText/g, "div").replace(/GreenText/g, "div style='color: #27BE98;'"))}</PlanCard>
                 </HowWorksDiv>
             </SectionBlock>
             <SectionBlock>
-                <SmallTitleText>Вы часто спрашиваете</SmallTitleText>
-                <TitleText>FAQ</TitleText>
+                <SmallTitleText>{t("faqSmallTitle")}</SmallTitleText>
+                <TitleText>{t("faqTitle")}</TitleText>
                 <FaqBlock>
                     <ThemeContext.Consumer>
                         {({ theme }) => (
@@ -178,19 +184,19 @@ export default function Home(props) {
                         )}
                     </ThemeContext.Consumer>
                     <FaqQuestionsBlock>
-                        <FaqQuestion title='Какие валюты поддерживает Mintxchange?'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique ornare quam commodo magna. Convallis ullamcorper nulla nibh et turpis suspendisse aliquam. Quam massa cursus scelerisque fringilla quam quisque nunc. Hac tempor cursus maecenas in suscipit. Donec aliquet elit, in nulla risus in eget ac. Aliquam odio accumsan non libero, sagittis, nibh morbi.</FaqQuestion>
-                        <FaqQuestion title='Какие гарантии безопасности вы даёте?'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique ornare quam commodo magna. Convallis ullamcorper nulla nibh et turpis suspendisse aliquam. Quam massa cursus scelerisque fringilla quam quisque nunc. Hac tempor cursus maecenas in suscipit. Donec aliquet elit, in nulla risus in eget ac. Aliquam odio accumsan non libero, sagittis, nibh morbi.</FaqQuestion>
-                        <FaqQuestion title='Сколько времени занимает процес верификации личности?'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique ornare quam commodo magna. Convallis ullamcorper nulla nibh et turpis suspendisse aliquam. Quam massa cursus scelerisque fringilla quam quisque nunc. Hac tempor cursus maecenas in suscipit. Donec aliquet elit, in nulla risus in eget ac. Aliquam odio accumsan non libero, sagittis, nibh morbi.</FaqQuestion>
-                        <FaqQuestion title='Какую сумму я могу обменять за один раз?'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique ornare quam commodo magna. Convallis ullamcorper nulla nibh et turpis suspendisse aliquam. Quam massa cursus scelerisque fringilla quam quisque nunc. Hac tempor cursus maecenas in suscipit. Donec aliquet elit, in nulla risus in eget ac. Aliquam odio accumsan non libero, sagittis, nibh morbi.</FaqQuestion>
+                        <FaqQuestion title={t("faq1Title")}>{t("faq1Text")}</FaqQuestion>
+                        <FaqQuestion title={t("faq2Title")}>{t("faq2Text")}</FaqQuestion>
+                        <FaqQuestion title={t("faq3Title")}>{t("faq3Text")}</FaqQuestion>
+                        <FaqQuestion title={t("faq4Title")}>{t("faq4Text")}</FaqQuestion>
                     </FaqQuestionsBlock>
                 </FaqBlock>
             </SectionBlock>
             <SectionBlock style={{flexDirection: "row", justifyContent: "space-between"}}>
                 <ReferalLeft>
-                    <SmallTitleText>Реферальная программа</SmallTitleText>
-                    <TitleText style={{marginTop: "1rem", marginBottom: "2rem", textAlign: "left"}}>Приглашайте друзей</TitleText>
-                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique ornare quam commodo magna. Convallis ullamcorper nulla nibh et turpis suspendisse aliquam. Quam massa cursus scelerisque fringilla quam quisque nunc. Hac tempor cursus maecenas in suscipit. </span>
-                    <GreenBtn style={{marginTop: "3.5rem"}}>Пригласить</GreenBtn>
+                    <SmallTitleText>{t("referalSmallTitle")}</SmallTitleText>
+                    <TitleText style={{marginTop: "1rem", marginBottom: "2rem", textAlign: "left"}}>{t("referalTitle")}</TitleText>
+                    <span>{t("referalText")}</span>
+                    <GreenBtn style={{marginTop: "3.5rem"}}>{t("invite", {ns: "common"})}</GreenBtn>
                 </ReferalLeft>
                 <ReferalRight>
                     <ReferalGreenShadow />
@@ -198,7 +204,7 @@ export default function Home(props) {
                 </ReferalRight>
             </SectionBlock>
             <PartnersSection>
-                <PartnersTitle>Партнеры</PartnersTitle>
+                <PartnersTitle>{t("partners")}</PartnersTitle>
                 <PartnersDiv>
                     <PartnersBtn>
                         <Image src={partnersArrow} />
