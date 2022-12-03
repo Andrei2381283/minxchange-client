@@ -49,7 +49,7 @@ export async function getServerSideProps({ req, locale }) {
     return {
         props: {
             _theme: cookie.parse(req.headers.cookie || "").theme || "Light",
-            ...(await serverSideTranslations(locale/* , ['common', 'header'] */)),
+            ...(await serverSideTranslations(locale)),
             // Will be passed to the page component as props
         },
     };
