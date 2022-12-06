@@ -194,7 +194,7 @@ export default function Home(props) {
                                 <FaqBlock2Div theme={theme.name}>
                                     <FaqBlock2Img theme={theme.name} src={greenMark} alt="" />
                                     <FaqBlock2Title>+ 540$</FaqBlock2Title>
-                                    <FaqBlock2Text>{t("faqImgText")}</FaqBlock2Text>
+                                    <FaqBlock2Text theme={theme.name}>{t("faqImgText")}</FaqBlock2Text>
                                 </FaqBlock2Div>
                             </FaqBlockImg>
                         )}

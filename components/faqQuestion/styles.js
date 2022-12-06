@@ -53,5 +53,5 @@ export const FaqQuestionAnswer = styled.div`
         }
     }
 
-    animation: 0.2s ${props => props.open ? "qAnim" : "qAnim2"};
+    animation: 0.2s 1 alternate ${props => props.open ? "qAnim" : "qAnim2"};
 `
