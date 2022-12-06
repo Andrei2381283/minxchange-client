@@ -18,6 +18,7 @@ export const WithdrawBlockSearchInput = styled.input`
     border: none;
     position: relative;
     font-size: 1rem;
+    width: 100%;
 
     color: ${props => props.theme == "Light" ? "initial" : "white"};
 
