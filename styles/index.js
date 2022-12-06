@@ -339,6 +339,42 @@ export const GreenText = styled.span`
     color: #27BE98;
 `
 
+export const ComingSoonDiv = styled.div`
+    position: relative;
+    max-width: 0;
+    max-height: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    margin-top: 6.8125rem;
+
+    z-index: 1;
+
+    @media (max-width: 998px) {
+        margin: 0 auto;
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        min-width: 7.4375rem;
+        min-height: 7.4375rem;
+        background: #3AD5AD;
+        border-radius: 50%;
+    }
+`
+
+export const ComingSoonText = styled.span`
+    font-weight: 500;
+    color: white;
+    margin-top: 0.25rem;
+    text-align: center;
+`
+
 export const FaqBlock = styled.div`
     display: flex;
     justify-content: space-between;
@@ -384,6 +420,63 @@ export const FaqImg2 = styled(Image)`
         background: linear-gradient(311.46deg, rgba(236, 236, 241, 0.12) 2.47%, rgba(0, 0, 0, 0.1) 118.77%);
         backdrop-filter: blur(15px);
     `}
+`
+
+export const FaqBlock2Div = styled.div`
+    position: absolute;
+    top: 14.4375rem;
+    left: 19.625rem;
+    width: 12.5625rem;
+    height: 11.354375rem;
+
+    ${props => props.theme == "Light" ? `
+        background: linear-gradient(311.46deg, rgba(255, 255, 255, 0.28) 2.47%, rgba(255, 255, 255, 0) 118.77%);
+        filter: drop-shadow(-3.70613px 3.70613px 12.9714px rgba(85, 117, 109, 0.18));
+        backdrop-filter: blur(13.898px);
+    ` : `
+        background: linear-gradient(311.46deg, rgba(236, 236, 241, 0.12) 2.47%, rgba(0, 0, 0, 0.1) 118.77%);
+        backdrop-filter: blur(15px);
+    `}
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2.75rem 2.3125rem;
+`
+
+export const FaqBlock2Img = styled(Image)`
+
+    ${props => props.theme == "Light" ? `
+        background: linear-gradient(90deg, white, white);
+        background-size: 50% 50%;
+        background-repeat: no-repeat;
+        background-position: center;
+        border-radius: 50%;
+    ` : `
+
+    `}
+
+`
+
+export const FaqBlock2Title = styled.span`
+    color: #27BE98;
+    font-weight: 500;
+    font-size: 2rem;
+    margin-top: 0.5rem;
+`
+
+export const FaqBlock2Text = styled.span`
+    ${props => props.theme == "Light" ? `
+        color: rgba(0, 0, 2, 0.4);
+    ` : `
+        color: white;
+    `}
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
 `
 
 export const FaqGreenShadow = styled.div`

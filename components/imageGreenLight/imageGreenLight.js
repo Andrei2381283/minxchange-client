@@ -5,7 +5,7 @@ import { ImageGreenLightDiv } from './styles';
 const ImageGreenLight = ({ src, alt }) => {
 
     return <ImageGreenLightDiv>
-        <Image src={src} alt={alt || ""} />
+        <Image style={{position: "relative"}} src={src} alt={alt || ""} />
     </ImageGreenLightDiv>
 }
 

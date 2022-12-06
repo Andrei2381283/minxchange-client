@@ -37,13 +37,13 @@ export default function Funds(props) {
                 <PartnersTitle style={{color: "white"}}>{t("partners")}</PartnersTitle>
                 <PartnersDiv>
                     <PartnersBtnW>
-                        <Image src={partnersArrowW} />
+                        <Image alt="" src={partnersArrowW} />
                     </PartnersBtnW>
-                    <Image style={{ width: "17.75rem", height: "auto" }} src={bestchangeW} />
-                    <Image style={{ width: "17.75rem", height: "auto" }} src={binanceW} />
-                    <Image style={{ width: "18.75rem", height: "auto" }} src={blockchainW} />
+                    <Image style={{ width: "17.75rem", height: "auto" }} alt="" src={bestchangeW} />
+                    <Image style={{ width: "17.75rem", height: "auto" }} alt="" src={binanceW} />
+                    <Image style={{ width: "18.75rem", height: "auto" }} alt="" src={blockchainW} />
                     <PartnersBtnW>
-                        <Image src={partnersArrowW} />
+                        <Image alt="" src={partnersArrowW} />
                     </PartnersBtnW>
                 </PartnersDiv>
             </GPartnersSectionBlock>

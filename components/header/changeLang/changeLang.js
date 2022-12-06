@@ -18,7 +18,7 @@ const ChangeLang = ({ style, $pcElement, $mobileElement }) => {
         {({ theme, changeTheme }) => (
             <ChangeLngContainer style={style || {}} $pcElement={$pcElement} $mobileElement={$mobileElement} onClick={() => setOpen(!isOpen)}>
                 <span>{i18n.language.toUpperCase()}</span>
-                <Image src={arrowDown} />
+                <Image alt="" src={arrowDown} />
                 {isOpen && (
                     <ChangeLngList theme={theme}>
                         {langs.map((elem, i) => <ChangeLngElem key={i} href="" locale={elem}>{elem}</ChangeLngElem>)}

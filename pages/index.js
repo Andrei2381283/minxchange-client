@@ -8,7 +8,7 @@ import { useTranslation } from 'next-i18next';
 import parseHTML from "html-react-parser";
 
 import Page from '../components/page/page';
-import { AboutDescrText, AboutInfosBlock, AboutInfosDescr, AboutInfosLine, AboutInfosTitle, AboutSectionBlock, CardsImage, Currency1, Currency2, DollarImg, FaqBlock, FaqBlockImg, FaqGreenShadow, FaqImg1, FaqImg2, FaqQuestionsBlock, GreenLine, GreenMarkDiv, GreenMarksDiv, GreenMarkSubText, GreenShadow1, GreenShadow2, GreenText, HowWorksDiv, IllustrationBlock, IllustrationBlockLeft, IllustrationBlockRight, LitecoinImg, PartnersBtn, PartnersDiv, PartnersSection, PartnersTitle, PayeerImg, ReferalGreenShadow, ReferalLeft, ReferalRight, SectionBlock, SmallTitleText, TetherImg, TitleText, TitleTextH1, WhiteShadow } from '../styles';
+import { AboutDescrText, AboutInfosBlock, AboutInfosDescr, AboutInfosLine, AboutInfosTitle, AboutSectionBlock, CardsImage, ComingSoonDiv, ComingSoonText, Currency1, Currency2, DollarImg, FaqBlock, FaqBlock2Div, FaqBlock2Img, FaqBlock2Text, FaqBlock2Title, FaqBlockImg, FaqGreenShadow, FaqImg1, FaqImg2, FaqQuestionsBlock, GreenLine, GreenMarkDiv, GreenMarksDiv, GreenMarkSubText, GreenShadow1, GreenShadow2, GreenText, HowWorksDiv, IllustrationBlock, IllustrationBlockLeft, IllustrationBlockRight, LitecoinImg, PartnersBtn, PartnersDiv, PartnersSection, PartnersTitle, PayeerImg, ReferalGreenShadow, ReferalLeft, ReferalRight, SectionBlock, SmallTitleText, TetherImg, TitleText, TitleTextH1, WhiteShadow } from '../styles';
 import Image from 'next/image';
 import GreenBtn from '../components/greenBtn/greenBtn';
 import WhyUsText from '../components/whyUsText/whyUsText';
@@ -30,6 +30,14 @@ import currency1D from "../assets/Сurrency1D.svg";
 import currency2D from "../assets/Сurrency2D.svg";
 import cards from "../assets/cards.svg";
 import howWorks1 from "../assets/howWorks1.svg";
+import howWorks2 from "../assets/howWorks2.svg";
+import howWorks3 from "../assets/howWorks3.svg";
+import howWorks4 from "../assets/howWorks4.svg";
+import plan1 from "../assets/plan1.svg";
+import plan2 from "../assets/plan2.svg";
+import plan3 from "../assets/plan3.svg";
+import plan4 from "../assets/plan4.svg";
+import time from "../assets/time.svg";
 import faqImg from "../assets/faqImg.svg";
 import faqImgD from "../assets/faqImgD.svg";
 import faqImg1 from "../assets/faqImg1.svg";
@@ -89,14 +97,14 @@ export default function Home(props) {
                             <>
                                 <GreenShadow1 />
                                 <GreenShadow2 />
-                                <Image style={{ position: "absolute", left: "6.9375em", top: "2.15em", height: "auto", width: "29.75em" }} src={smartphone} />
+                                <Image style={{ position: "absolute", left: "6.9375em", top: "2.15em", height: "auto", width: "29.75em" }} alt="" src={smartphone} />
                                         <WhiteShadow color={theme == themes.light ? "linear-gradient(180deg, rgba(250, 250, 250, 0) 0%, #FAFAFA 62.16%)" : "linear-gradient(180deg, rgba(4, 3, 16, 0) 0%, #040310 62.16%)"} />
-                                <PayeerImg src={payeerLeft} />
-                                <LitecoinImg src={litecoinLleft} />
-                                <DollarImg  src={dollar} />
-                                <TetherImg src={tether} />
-                                <Currency1 theme={theme.name} src={theme == themes.light ? currency1 : currency1D} />
-                                <Currency2 theme={theme.name} src={theme == themes.light ? currency2 : currency2D} />
+                                <PayeerImg alt="" src={payeerLeft} />
+                                <LitecoinImg alt="" src={litecoinLleft} />
+                                <DollarImg alt=""  src={dollar} />
+                                <TetherImg alt="" src={tether} />
+                                <Currency1 theme={theme.name} alt="" src={theme == themes.light ? currency1 : currency1D} />
+                                <Currency2 theme={theme.name} alt="" src={theme == themes.light ? currency2 : currency2D} />
                             </>
                         )}
                     </ThemeContext.Consumer>
@@ -147,26 +155,30 @@ export default function Home(props) {
                 <SmallTitleText>{t("howItWorksSmallTitle")}</SmallTitleText>
                 <TitleText>{t("howItWorksTitle")}</TitleText>
                 <HowWorksDiv>
-                    <HowWorksCard number="1" image={howWorks1} title="Регистрация">{t("howItWorks1")}</HowWorksCard>
-                    <HowWorksCard style={{ marginLeft: "1em" }} number="2" image={howWorks1} title="Регистрация">{t("howItWorks2")}</HowWorksCard>
-                    <HowWorksCard style={{ marginLeft: "1em" }} number="3" image={howWorks1} title="Регистрация">{t("howItWorks3")}</HowWorksCard>
-                    <HowWorksCard style={{ marginLeft: "1em" }} number="4" image={howWorks1} title="Регистрация">{t("howItWorks4")}</HowWorksCard>
+                    <HowWorksCard number="1" image={howWorks1} title={t("howItWorks1Title")}>{t("howItWorks1")}</HowWorksCard>
+                    <HowWorksCard number="2" image={howWorks2} title={t("howItWorks2Title")}>{t("howItWorks2")}</HowWorksCard>
+                    <HowWorksCard number="3" image={howWorks3} title={t("howItWorks3Title")}>{t("howItWorks3")}</HowWorksCard>
+                    <HowWorksCard number="4" image={howWorks4} title={t("howItWorks4Title")}>{t("howItWorks4")}</HowWorksCard>
                 </HowWorksDiv>
             </SectionBlock>
             <SectionBlock>
                 <SmallTitleText>{t("tradeSmallTitle")}</SmallTitleText>
                 <TitleText>{t("tradeTitle")}</TitleText>
                 <WithdrawBlock />
-                <GreenBtn style={{marginTop: "4rem"}}>{t("start", {ns: "common"})}</GreenBtn>
+                <GreenBtn href="/trade" style={{marginTop: "4rem"}}>{t("start", {ns: "common"})}</GreenBtn>
             </SectionBlock>
             <SectionBlock>
                 <SmallTitleText>{t("soonSmallTitle")}</SmallTitleText>
                 <TitleText>{t("soonTitle")}</TitleText>
                 <HowWorksDiv>
-                    <PlanCard image={howWorks1}>{parseHTML(t("soon1").replace(/\/GreenText/g, "div").replace(/GreenText/g, "div style='color: #27BE98;'"))}</PlanCard>
-                    <PlanCard style={{ marginLeft: "1em" }} image={howWorks1}>{parseHTML(t("soon2").replace(/\/GreenText/g, "div").replace(/GreenText/g, "div style='color: #27BE98;'"))}</PlanCard>
-                    <PlanCard style={{ marginLeft: "1em" }} image={howWorks1}>{parseHTML(t("soon3").replace(/\/GreenText/g, "div").replace(/GreenText/g, "div style='color: #27BE98;'"))}</PlanCard>
-                    <PlanCard style={{ marginLeft: "1em" }} image={howWorks1}>{parseHTML(t("soon4").replace(/\/GreenText/g, "div").replace(/GreenText/g, "div style='color: #27BE98;'"))}</PlanCard>
+                    <PlanCard image={plan1}>{parseHTML(t("soon1").replace(/\/GreenText/g, "/div").replace(/GreenText/g, "div style='color: #27BE98;'"))}</PlanCard>
+                    <PlanCard image={plan2}>{parseHTML(t("soon2").replace(/\/GreenText/g, "/div").replace(/GreenText/g, "div style='color: #27BE98;'"))}</PlanCard>
+                    <PlanCard image={plan3}>{parseHTML(t("soon3").replace(/\/GreenText/g, "/div").replace(/GreenText/g, "div style='color: #27BE98;'"))}</PlanCard>
+                    <ComingSoonDiv>
+                        <Image alt="" src={time} />
+                        <ComingSoonText>{t("comingSoon")}</ComingSoonText>
+                    </ComingSoonDiv>
+                    <PlanCard image={plan4}>{parseHTML(t("soon4").replace(/\/GreenText/g, "/div").replace(/GreenText/g, "div style='color: #27BE98;'"))}</PlanCard>
                 </HowWorksDiv>
             </SectionBlock>
             <SectionBlock>
@@ -177,9 +189,13 @@ export default function Home(props) {
                         {({ theme }) => (
                             <FaqBlockImg>
                                 <FaqGreenShadow />
-                                <Image style={{ width: "32.75rem", height: "auto" }} src={theme == themes.light ? faqImg : faqImgD} />
-                                <FaqImg1 theme={theme.name} src={theme == themes.light ? faqImg1 : faqImg1D} />
-                                <FaqImg2 theme={theme.name} src={theme == themes.light ? faqImg2 : faqImg2D} />
+                                <Image style={{ width: "32.75rem", height: "auto" }} alt="" src={theme == themes.light ? faqImg : faqImgD} />
+                                <FaqImg1 theme={theme.name} alt="" src={theme == themes.light ? faqImg1 : faqImg1D} />
+                                <FaqBlock2Div theme={theme.name}>
+                                    <FaqBlock2Img theme={theme.name} src={greenMark} alt="" />
+                                    <FaqBlock2Title>+ 540$</FaqBlock2Title>
+                                    <FaqBlock2Text>{t("faqImgText")}</FaqBlock2Text>
+                                </FaqBlock2Div>
                             </FaqBlockImg>
                         )}
                     </ThemeContext.Consumer>
@@ -200,20 +216,20 @@ export default function Home(props) {
                 </ReferalLeft>
                 <ReferalRight>
                     <ReferalGreenShadow />
-                    <Image style={{ width: "41.6875rem", height: "auto" }} src={referalImg} />
+                    <Image style={{ width: "41.6875rem", height: "auto" }} alt="" src={referalImg} />
                 </ReferalRight>
             </SectionBlock>
             <PartnersSection>
                 <PartnersTitle>{t("partners")}</PartnersTitle>
                 <PartnersDiv>
                     <PartnersBtn>
-                        <Image src={partnersArrow} />
+                        <Image alt="" src={partnersArrow} />
                     </PartnersBtn>
-                    <Image style={{ width: "17.75rem", height: "auto" }} src={bestchange} />
-                    <Image style={{ width: "17.75rem", height: "auto" }} src={binance} />
-                    <Image style={{ width: "18.75rem", height: "auto" }} src={blockchain} />
+                    <Image style={{ width: "17.75rem", height: "auto" }} alt="" src={bestchange} />
+                    <Image style={{ width: "17.75rem", height: "auto" }} alt="" src={binance} />
+                    <Image style={{ width: "18.75rem", height: "auto" }} alt="" src={blockchain} />
                     <PartnersBtn>
-                        <Image src={partnersArrow} />
+                        <Image alt="" src={partnersArrow} />
                     </PartnersBtn>
                 </PartnersDiv>
             </PartnersSection>
