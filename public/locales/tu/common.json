@@ -1,8 +1,8 @@
 {
-    "reg": "Регистрация",
-    "login": "Войти",
-    "start": "Начать",
-    "invite": "Пригласить",
-    "search": "Поиск",
-    "all": "Все"
+    "reg": "Kayıt",
+    "login": "Giriş",
+    "start": "Başlat",
+    "invite": "Davet etmek",
+    "search": "Arama",
+    "all": "Tümü"
 }
