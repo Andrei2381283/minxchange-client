@@ -2,10 +2,12 @@ import React from 'react';
 import { ThemeContext, themes } from '../theme/theme';
 /* import Footer from '../components/footer/footer';
 import Header from '../components/header/header'; */
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+/* import { serverSideTranslations } from 'next-i18next/serverSideTranslations'; */
 import cookie from "cookie";
 import { useTranslation } from 'next-i18next';
 import parseHTML from "html-react-parser";
+import nextI18nextConfig from '../next-i18next.config';
+import { getContent } from '../utils/api';
 
 import Page from '../components/page/page';
 import { AboutDescrText, AboutInfosBlock, AboutInfosDescr, AboutInfosLine, AboutInfosTitle, AboutSectionBlock, CardsImage, ComingSoonDiv, ComingSoonText, Currency1, Currency2, DollarImg, FaqBlock, FaqBlock2Div, FaqBlock2Img, FaqBlock2Text, FaqBlock2Title, FaqBlockImg, FaqGreenShadow, FaqImg1, FaqImg2, FaqQuestionsBlock, GreenLine, GreenMarkDiv, GreenMarksDiv, GreenMarkSubText, GreenShadow1, GreenShadow2, GreenText, HowWorksDiv, IllustrationBlock, IllustrationBlockLeft, IllustrationBlockRight, LitecoinImg, PartnersBtn, PartnersDiv, PartnersSection, PartnersTitle, PayeerImg, ReferalGreenShadow, ReferalLeft, ReferalRight, SectionBlock, SmallTitleText, TetherImg, TitleText, TitleTextH1, WhiteShadow } from '../styles';
@@ -54,19 +56,42 @@ import replaceStrToJsx from '../utils/replaceStrToJsx';
 
 
 export async function getServerSideProps({ req, locale }) {
+
+    const locales = await getContent(locale);
+
+    const ns = {};
+
+    locales.forEach(element => {
+        if(!element.headerContent || !element.language) return;
+        if(!ns[element.headerContent]) ns[element.headerContent] = {};
+        ns[element.headerContent][element.idContent] = element.textContent;
+    });
+
+    const _nextI18Next = {
+        initialI18nStore: {
+            [locale]: ns
+        },
+        initialLocale: locale,
+        ns: Object.keys(ns),
+        userConfig: {
+            default: {
+                i18n: nextI18nextConfig.i18n
+            },
+            i18n: nextI18nextConfig.i18n
+        }
+    }
     return {
         props: {
             _theme: cookie.parse(req.headers.cookie || "").theme || "Light",
-            ...(await serverSideTranslations(locale)),
-            // Will be passed to the page component as props
+            _nextI18Next,
         },
     };
 }
 
 export default function Home(props) {
-
+    
     const { t, i18n } = useTranslation("index");
-
+    
     return (
         <Page {...props}>
             <IllustrationBlock>
