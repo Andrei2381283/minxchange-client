@@ -1,13 +1,8 @@
 import React from 'react';
 import { ThemeContext, themes } from '../theme/theme';
-/* import Footer from '../components/footer/footer';
-import Header from '../components/header/header'; */
-/* import { serverSideTranslations } from 'next-i18next/serverSideTranslations'; */
+import { useTranslation } from '../utils/translate';
 import cookie from "cookie";
-import { useTranslation } from 'next-i18next';
 import parseHTML from "html-react-parser";
-import nextI18nextConfig from '../next-i18next.config';
-import { getContent } from '../utils/api';
 
 import Page from '../components/page/page';
 import { AboutDescrText, AboutInfosBlock, AboutInfosDescr, AboutInfosLine, AboutInfosTitle, AboutSectionBlock, CardsImage, ComingSoonDiv, ComingSoonText, Currency1, Currency2, DollarImg, FaqBlock, FaqBlock2Div, FaqBlock2Img, FaqBlock2Text, FaqBlock2Title, FaqBlockImg, FaqGreenShadow, FaqImg1, FaqImg2, FaqQuestionsBlock, GreenLine, GreenMarkDiv, GreenMarksDiv, GreenMarkSubText, GreenShadow1, GreenShadow2, GreenText, HowWorksDiv, IllustrationBlock, IllustrationBlockLeft, IllustrationBlockRight, LitecoinImg, PartnersBtn, PartnersDiv, PartnersSection, PartnersTitle, PayeerImg, ReferalGreenShadow, ReferalLeft, ReferalRight, SectionBlock, SmallTitleText, TetherImg, TitleText, TitleTextH1, WhiteShadow } from '../styles';
@@ -52,13 +47,13 @@ import bestchange from "../assets/bestchange.svg";
 import binance from "../assets/binance.svg";
 import blockchain from "../assets/blockchain.svg";
 import replaceStrToJsx from '../utils/replaceStrToJsx';
+import { getContent } from '../utils/api';
 
 
 
-export async function getServerSideProps({ req, locale }) {
-
-    const locales = await getContent(locale);
-
+export async function getServerSideProps({ req }) {
+    const locales = await getContent(cookie.parse(req.headers.cookie || "").lang || "ru");
+    
     const ns = {};
 
     locales.forEach(element => {
@@ -67,30 +62,20 @@ export async function getServerSideProps({ req, locale }) {
         ns[element.headerContent][element.idContent] = element.textContent;
     });
 
-    const _nextI18Next = {
-        initialI18nStore: {
-            [locale]: ns
-        },
-        initialLocale: locale,
-        ns: Object.keys(ns),
-        userConfig: {
-            default: {
-                i18n: nextI18nextConfig.i18n
-            },
-            i18n: nextI18nextConfig.i18n
-        }
-    }
     return {
         props: {
             _theme: cookie.parse(req.headers.cookie || "").theme || "Light",
-            _nextI18Next,
-        },
+            lang:  cookie.parse(req.headers.cookie || "").lang || "ru",
+            ns
+        }
     };
 }
 
 export default function Home(props) {
     
-    const { t, i18n } = useTranslation("index");
+    const { t } = useTranslation("index");
+
+    console.log(t("illustartionSmallTitle"));
     
     return (
         <Page {...props}>
@@ -192,6 +177,18 @@ export default function Home(props) {
                 <WithdrawBlock />
                 <GreenBtn href="/trade" style={{marginTop: "4rem"}}>{t("start", {ns: "common"})}</GreenBtn>
             </SectionBlock>
+            <SectionBlock style={{flexDirection: "row", justifyContent: "space-between"}}>
+                <ReferalLeft>
+                    <SmallTitleText>{t("referalSmallTitle")}</SmallTitleText>
+                    <TitleText style={{marginTop: "1rem", marginBottom: "2rem", textAlign: "left"}}>{t("referalTitle")}</TitleText>
+                    <span>{t("referalText")}</span>
+                    <GreenBtn style={{marginTop: "3.5rem"}}>{t("invite", {ns: "common"})}</GreenBtn>
+                </ReferalLeft>
+                <ReferalRight>
+                    <ReferalGreenShadow />
+                    <Image style={{ width: "41.6875rem", height: "auto" }} alt="" src={referalImg} />
+                </ReferalRight>
+            </SectionBlock>
             <SectionBlock>
                 <SmallTitleText>{t("soonSmallTitle")}</SmallTitleText>
                 <TitleText>{t("soonTitle")}</TitleText>
@@ -231,18 +228,6 @@ export default function Home(props) {
                         <FaqQuestion title={t("faq4Title")}>{t("faq4Text")}</FaqQuestion>
                     </FaqQuestionsBlock>
                 </FaqBlock>
-            </SectionBlock>
-            <SectionBlock style={{flexDirection: "row", justifyContent: "space-between"}}>
-                <ReferalLeft>
-                    <SmallTitleText>{t("referalSmallTitle")}</SmallTitleText>
-                    <TitleText style={{marginTop: "1rem", marginBottom: "2rem", textAlign: "left"}}>{t("referalTitle")}</TitleText>
-                    <span>{t("referalText")}</span>
-                    <GreenBtn style={{marginTop: "3.5rem"}}>{t("invite", {ns: "common"})}</GreenBtn>
-                </ReferalLeft>
-                <ReferalRight>
-                    <ReferalGreenShadow />
-                    <Image style={{ width: "41.6875rem", height: "auto" }} alt="" src={referalImg} />
-                </ReferalRight>
             </SectionBlock>
             <PartnersSection>
                 <PartnersTitle>{t("partners")}</PartnersTitle>

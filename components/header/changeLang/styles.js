@@ -38,7 +38,7 @@ export const ChangeLngList = styled.div`
     background: ${props => props.theme.bg};
 `
 
-export const ChangeLngElem = styled(Link)`
+export const ChangeLngElem = styled.div`
     color: inherit;
     text-decoration: none;
     width: 100%;

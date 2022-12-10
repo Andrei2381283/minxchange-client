@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from '../../utils/translate';
 import React, { useState } from 'react';
 import { ThemeContext, themes } from '../../theme/theme';
 import GreenBtn from '../greenBtn/greenBtn';
@@ -7,7 +7,7 @@ import { MobileMenuContainer, MobileMenuDiv, MobileMenuLink } from './styles';
 
 const MobileMenu = ({ isMobileMenuVisible, setMobileMenuVisible }) => {
 
-    const { t, i18n } = useTranslation("header");
+    const { t } = useTranslation("header");
 
     const [menuVisible, setMenuVisible] = useState(true);
 

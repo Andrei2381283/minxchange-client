@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from '../../utils/translate';
 import { ThemeContext, themes } from '../../theme/theme';
 import Logo from '../logo/logo';
 import ChangeLang from './changeLang/changeLang';

@@ -34,6 +34,7 @@ export const WithdrawBlockDiv = styled.div`
 `
 
 export const WithdrawBlockBtn = styled.button`
+    position: relative;
     background: ${props => props.selected ? "#38E7BA" : (props.theme == "Light" ? "#FFFFFF" : "transparent")};
     border: ${props => props.selected ? "1px solid #38E7BA" : (props.theme == "Light" ? "1px solid #ECECF1" : (props => props.small ? "1px solid #38E7BA" : "1px solid rgba(255, 255, 255, 0.07)"))};
     border-radius: 3px;
@@ -69,6 +70,26 @@ export const WithdrawBlockSubText = styled.span`
     font-size: 0.75rem;
     color: ${props => props.selected ? (props.theme == "Light" ? "#FFFFFF" : "#050411") : (props.theme == "Light" ? "rgba(0, 0, 2, 0.4)" : "rgba(255, 255, 255, 0.4)")};
     margin-top: 4px;
+`
+
+export const WithdrawBlockSubTextInput = styled.input`
+    font-weight: 500;
+    margin-left: 32px;
+    font-size: 0.75rem;
+    color: ${props => props.selected ? (props.theme == "Light" ? "#FFFFFF" : "#050411") : (props.theme == "Light" ? "rgba(0, 0, 2, 0.4)" : "rgba(255, 255, 255, 0.4)")};
+    margin-top: 4px;
+    background: transparent;
+    padding: 0;
+    border: 0.5px solid black;
+    outline: none;
+`
+
+export const WithdrawBlockRemove = styled(Image)`
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 12px;
+    height: 12px;
 `
 
 export const WithdrawBlockBtn3div = styled.div`

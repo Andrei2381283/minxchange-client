@@ -11,10 +11,12 @@ export const ContentEditLangDiv = styled.div`
 `
 
 export const ContentEditLangHeader = styled.span`
-    /* font-size: 18px; */
+    font-size: 17px;
     font-weight: 500;
 `
 
 export const ContentEditLangTextarea = styled.textarea`
     margin-left: 16px;
+
+    width: 100%;
 `

@@ -1,12 +1,12 @@
-import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { ThemeContext, themes } from '../../theme/theme';
+import { useTranslation } from '../../utils/translate';
 import Logo from '../logo/logo';
 import { FooterContainer, FooterLink, FooterLinksDiv } from "./styles";
 
 const Footer = () => {
 
-    const { t, i18n } = useTranslation("footer");
+    const { t } = useTranslation("footer");
 
     return <ThemeContext.Consumer>
         {({ theme }) => (
@@ -21,10 +21,10 @@ const Footer = () => {
                     <FooterLink href="/funds">{t("withdraw", {ns: "header"})}</FooterLink>
                 </FooterLinksDiv>
                 <FooterLinksDiv>
-                    <FooterLink href="">{t("policy")}</FooterLink>
-                    <FooterLink href="">{t("terms")}</FooterLink>
-                    <FooterLink href="">{t("use")}</FooterLink>
-                    <FooterLink href="">{t("cookie")}</FooterLink>
+                    <FooterLink href="/policy">{t("policy")}</FooterLink>
+                    <FooterLink href="/terms">{t("terms")}</FooterLink>
+                    <FooterLink href="/use">{t("use")}</FooterLink>
+                    <FooterLink href="/cookie">{t("cookie")}</FooterLink>
                 </FooterLinksDiv>
             </FooterContainer>
         )}

@@ -30,26 +30,20 @@ export async function getServerSideProps({ req }) {
 
 export default function Funds(props) {
 
-    const { t, i18n } = useTranslation("funds");
+    const { t, i18n } = useTranslation("cookie");
 
     return (
         <Page {...props}>
             <SectionBlock>
-                <SmallTitleText>{t("fundsSmallTitle")}</SmallTitleText>
-                <TitleText>{t("fundsTitle")}</TitleText>
+                <SmallTitleText>{t("cookieSmallTitle")}</SmallTitleText>
+                <TitleText>{t("cookieTitle")}</TitleText>
                 <ThemeContext.Consumer>
                     {({ theme }) => (
                         <>
                             <FundsShadow1 />
                             <FundsShadow2 />
                             <FundsSection theme={theme.name}>
-                                <FundsTitle>{t("fundsTitle2")}</FundsTitle>
-                                <FundsHeader number={1}>{t("fundsSectionHeader1")}</FundsHeader>
-                                <FundsText>{t("fundsText1")}</FundsText>
-                                <FundsText>{t("fundsText2")}</FundsText>
-                                <FundsHeader number={2}>{t("fundsSectionHeader2")}</FundsHeader>
-                                <FundsText>{t("fundsText3")}</FundsText>
-                                <FundsText>{t("fundsText4")}</FundsText>
+                                <FundsText>{t("cookieText")}</FundsText>
                             </FundsSection>
                         </>
                     )}

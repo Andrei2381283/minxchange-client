@@ -1,6 +1,5 @@
 import React from 'react';
 import cookie from "cookie";
-import nextI18nextConfig from '../next-i18next.config';
 import { getContent } from '../utils/api';
 import Image from 'next/image';
 import Page from '../components/page/page';
@@ -11,13 +10,12 @@ import partnersArrowW from "../assets/partnersArrowW.svg";
 import bestchangeW from "../assets/bestchangeW.svg";
 import binanceW from "../assets/binanceW.svg";
 import blockchainW from "../assets/blockchainW.svg";
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from '../utils/translate';
 
 
-export async function getServerSideProps({ req, locale }) {
-
-    const locales = await getContent(locale);
-
+export async function getServerSideProps({ req }) {
+    const locales = await getContent(cookie.parse(req.headers.cookie || "").lang || "ru");
+    
     const ns = {};
 
     locales.forEach(element => {
@@ -26,30 +24,18 @@ export async function getServerSideProps({ req, locale }) {
         ns[element.headerContent][element.idContent] = element.textContent;
     });
 
-    const _nextI18Next = {
-        initialI18nStore: {
-            [locale]: ns
-        },
-        initialLocale: locale,
-        ns: Object.keys(ns),
-        userConfig: {
-            default: {
-                i18n: nextI18nextConfig.i18n
-            },
-            i18n: nextI18nextConfig.i18n
-        }
-    }
     return {
         props: {
             _theme: cookie.parse(req.headers.cookie || "").theme || "Light",
-            _nextI18Next,
-        },
+            lang:  cookie.parse(req.headers.cookie || "").lang || "ru",
+            ns
+        }
     };
 }
 
 export default function Funds(props) {
 
-    const { t, i18n } = useTranslation("index");
+    const { t } = useTranslation("index");
 
     return (
         <Page {...props}>

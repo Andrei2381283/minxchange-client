@@ -6,8 +6,9 @@ import Header from '../header/header'
 import { GlobalStyle } from '../../styles/globals.js'
 import { ThemeContext, themes } from '../../theme/theme';
 import MobileMenu from '../mobileMenu/mobileMenu';
+import { TranslationContext, useTranslation } from '../../utils/translate';
 
-function Page({ children, _theme }) {
+function Page({ children, _theme, lang, ns }) {
   const [theme, setTheme] = useState(themes[_theme.toLowerCase()]);
 
   function changeTheme(theme) {

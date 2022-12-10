@@ -4,9 +4,18 @@ export const AdminDropDownTitle = styled.p`
     margin: 0;
     font-size: 18px;
 
+    border: none;
+    outline: none;
+    background: transparent;
+`
+
+export const AdminDropDownHeaderDiv = styled.div`
+    display: flex;
+
     padding: 10px;
 
-    background: lightblue;
+    /* background: lightblue; */
+    border-radius: 3px;
 `
 
 export const AdminDropDownDiv = styled.div`
@@ -16,8 +25,8 @@ export const AdminDropDownDiv = styled.div`
     width: 100%;
     margin: 6px 0;
 
-    border: 1px solid black;
-    border-radius: 5px;
+    border: 1px solid lightgray;
+    border-radius: 3px;
 
     cursor: pointer;
 `
