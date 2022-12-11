@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from 'next/server'
-import { verifyToken } from '../utils/api';
+import { verifyToken } from './utils/api';
 
 export async function middleware(req, ev) {
     const { pathname } = req.nextUrl;
