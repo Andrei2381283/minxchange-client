@@ -1,11 +1,31 @@
 import { useTranslation } from '../../utils/translate';
-import React, { useState } from 'react';
+import cookie from "cookie";
+import React, { useEffect, useState } from 'react';
 import { ThemeContext, themes } from '../../theme/theme';
 import GreenBtn from '../greenBtn/greenBtn';
 import LightBtn from '../lightBtn/lightBtn';
 import { MobileMenuContainer, MobileMenuDiv, MobileMenuLink } from './styles';
+import { verifyToken } from '../../utils/api';
 
 const MobileMenu = ({ isMobileMenuVisible, setMobileMenuVisible, showLogin }) => {
+
+    const [init, setInit] = useState(false);
+
+    const [verified, serVerified] = useState(false);
+
+    useEffect(() => {
+        if (!init) {
+            setInit(true);
+            (async () => {
+                try {
+                    const isVerified = await verifyToken(typeof document == "object" && cookie.parse(document.cookie).token);
+                    serVerified(isVerified);
+                } catch (err) {
+
+                }
+            })();
+        }
+    })
 
     const { t } = useTranslation("header");
 
@@ -28,8 +48,12 @@ const MobileMenu = ({ isMobileMenuVisible, setMobileMenuVisible, showLogin }) =>
                     <MobileMenuLink scroll={false} href="/#whyUsBlock">{t("why")}</MobileMenuLink>
                     <MobileMenuLink scroll={false} href="/#howItWorksBlock">{t("how-works")}</MobileMenuLink>
                     <MobileMenuLink href="/funds">{t("withdraw")}</MobileMenuLink>
-                    <GreenBtn style={{ width: "auto", marginTop: "20px" }} small={true}>{t("reg", { ns: "common" })}</GreenBtn>
-                    <LightBtn onClick={() => showLogin(true)} style={{ width: "auto", marginTop: "10px" }} >{t("login", { ns: "common" })}</LightBtn>
+                    {verified ? <>
+                        <GreenBtn href="/admin" small={true} style={{ width: "auto", marginTop: "20px" }}>Управление</GreenBtn>
+                    </> : <>
+                        <GreenBtn style={{ width: "auto", marginTop: "20px" }} small={true}>{t("reg", { ns: "common" })}</GreenBtn>
+                        <LightBtn onClick={() => showLogin(true)} style={{ width: "auto", marginTop: "10px" }} >{t("login", { ns: "common" })}</LightBtn>
+                    </>}
                 </MobileMenuDiv>
             }
         </ThemeContext.Consumer>

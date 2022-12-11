@@ -1,5 +1,6 @@
 import React from 'react';
 import cookie from "cookie";
+import parseHTML from "html-react-parser";
 import { FundsSection, FundsShadow1, FundsShadow2, FundsText, FundsTitle, SectionBlock, SmallTitleText, TitleText } from '../styles';
 import { getContent } from '../utils/api';
 import Page from '../components/page/page';
@@ -43,7 +44,7 @@ export default function Funds(props) {
                             <FundsShadow1 />
                             <FundsShadow2 />
                             <FundsSection theme={theme.name}>
-                                <FundsText>{t("cookieText")}</FundsText>
+                                <FundsText>{parseHTML(t("cookieText").replce(/\n/g, "<br>"))}</FundsText>
                             </FundsSection>
                         </>
                     )}
