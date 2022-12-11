@@ -14,7 +14,7 @@ export const getContent = async (lang) => {
 
 export const verifyToken = async (token) => {
 
-    const res = await axios.get(server + "/api/auth/verify", { headers: { "x-auth-token": token || (document && cookie.parse(document.cookie).token) } });
+    const res = await axios.get(server + "/api/auth/verify", { headers: { "x-auth-token": token } });
 
     return res.status == 200;
 
