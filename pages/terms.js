@@ -44,7 +44,7 @@ export default function Funds(props) {
                             <FundsShadow1 />
                             <FundsShadow2 />
                             <FundsSection theme={theme.name}>
-                                <FundsText>{parseHTML(t("termsText").replce(/\n/g, "<br>"))}</FundsText>
+                                <FundsText>{parseHTML(t("termsText").replace(/\n/g, "<br>"))}</FundsText>
                             </FundsSection>
                         </>
                     )}
