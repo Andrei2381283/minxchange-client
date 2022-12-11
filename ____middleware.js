@@ -1,4 +1,4 @@
-import { NextResponse, NextRequest } from 'next/server'
+/* import { NextResponse, NextRequest } from 'next/server'
 import { verifyToken } from './utils/api';
 
 export async function middleware(req, ev) {
@@ -8,4 +8,4 @@ export async function middleware(req, ev) {
         if(!isVerify) return NextResponse.redirect('/');
     }
     return NextResponse.next();
-}
+} *//*  */

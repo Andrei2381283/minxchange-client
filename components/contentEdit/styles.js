@@ -18,5 +18,7 @@ export const ContentEditLangHeader = styled.span`
 export const ContentEditLangTextarea = styled.textarea`
     margin-left: 16px;
 
+    font-family: inherit;
+
     width: 100%;
 `

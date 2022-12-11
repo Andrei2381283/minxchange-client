@@ -4,9 +4,10 @@ import AdminDropDown from "../components/adminDropDown/adminDropDown";
 import ContentEdit from "../components/contentEdit/contentEdit";
 import WithdrawBlock from "../components/withdrawBlock/withdrawBlock";
 import { AdminBack, AdminSave, AdminSection } from "../styles/admin";
-import { getContent, saveContentItem } from "../utils/api";
+import { getContent, saveContentItem, verifyToken } from "../utils/api";
 import { GlobalStyle } from "../styles/globals";
 import { themes } from "../theme/theme";
+import { useRouter } from "next/router";
 
 
 export async function getServerSideProps({ req }) {
@@ -44,6 +45,13 @@ const trData = {
 
 export default function Admin(props) {
     //console.log(cookie.parse(document.cookie));
+
+    //const isVerify = await verifyToken(req.cookies.get('token')?.value || "");
+
+    const router = useRouter();
+
+    const [allowDisplay, setAllowDisplay] = useState(false);
+
     const [init, setInit] = useState(false);
 
     const [content, setContent] = useState([]);
@@ -52,6 +60,9 @@ export default function Admin(props) {
         if(!init) {
             setInit(true);
             (async () => {
+                const isVerified = await verifyToken(typeof document == "object" && cookie.parse(document.cookie).token);
+                if(!isVerified) router.push("/");
+                setAllowDisplay(isVerified)
                 setContent(await getContent(""));
             })();
         }
@@ -76,7 +87,7 @@ export default function Admin(props) {
         for(const i in changedItems) delete changedItems[i];
     }
 
-    return  <>
+    return  allowDisplay && <>
         <GlobalStyle theme={themes.light} />
         <AdminSection>
             <AdminBack href="/">Смотреть Mintxchange</AdminBack>
@@ -96,5 +107,5 @@ export default function Admin(props) {
 
             </WithdrawBlock>
         </AdminSection>
-    </>
+    </> || ""
 }
