@@ -17,12 +17,17 @@ export const LoginPopupContainer = styled.div`
     background: rgba(0,0,0,0.4);
 `
 
+export const LoginPopupHeader = styled.h2`
+    margin-top: 0;
+    font-size: 1.75rem;
+`
+
 export const LoginPopupDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    padding: 1rem;
+    padding: 2rem;
 
     background: ${props => props.theme.name == "Light" ? "white" : "#050312"};
     border-radius: 5px;

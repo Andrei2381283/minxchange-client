@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import cookie from "cookie";
 import { useTranslation } from '../../utils/translate';
 import { ThemeContext, themes } from '../../theme/theme';
 import Logo from '../logo/logo';
@@ -6,8 +7,29 @@ import ChangeLang from './changeLang/changeLang';
 import { HeaderContainer, HeaderLink, HeaderMobileMenu, HeaderMobileMenuLine, HeaderThemeContainer, HeaderThemePoint } from "./styles";
 import GreenBtn from '../greenBtn/greenBtn';
 import LightBtn from '../lightBtn/lightBtn';
+import { verifyToken } from '../../utils/api';
 
 const Header = ({ isMobileMenuVisible, setMobileMenuVisible, showLogin }) => {
+
+    //const token = typeof document == "objecy" ? cookie.parse(document.cookie).token : "";
+
+    const [init, setInit] = useState(false);
+
+    const [verified, serVerified] = useState(false);
+
+    useEffect(() => {
+        if(!init) {
+            setInit(true);
+            (async () => {
+                try{
+                    const isVerified = await verifyToken(typeof document == "object" && cookie.parse(document.cookie).token);
+                    serVerified(isVerified);
+                } catch(err){
+
+                }
+            })();
+        }
+    })
 
     const { t, i18n } = useTranslation("header");
     
@@ -33,8 +55,12 @@ const Header = ({ isMobileMenuVisible, setMobileMenuVisible, showLogin }) => {
             }
         </ThemeContext.Consumer>
         <ChangeLang />
-        <GreenBtn $pcElement small={true} style={{marginLeft: "2.5em"}}>{t("reg", {ns: "common"})}</GreenBtn>
-        <LightBtn $pcElement style={{marginLeft: "0.5em"}} onClick={() => showLogin(true)}>{t("login", {ns: "common"})}</LightBtn>
+        {verified ? <>
+            <GreenBtn href="/admin" $pcElement small={true} style={{marginLeft: "2.5em"}}>Управление</GreenBtn>
+        </> : <>
+            <GreenBtn $pcElement small={true} style={{marginLeft: "2.5em"}}>{t("reg", {ns: "common"})}</GreenBtn>
+            <LightBtn $pcElement style={{marginLeft: "0.5em"}} onClick={() => showLogin(true)}>{t("login", {ns: "common"})}</LightBtn>
+        </>}
     </HeaderContainer>
 }
 

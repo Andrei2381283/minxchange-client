@@ -4,5 +4,6 @@
     "start": "To begin",
     "invite": "To invite",
     "search": "Search",
-    "all": "All"
+    "all": "All",
+    "auth": "Authorization"
 }

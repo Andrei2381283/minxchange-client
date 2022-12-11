@@ -29,7 +29,7 @@ function Page({ children, _theme, lang, ns }) {
       </Head>
       <GlobalStyle theme={theme} />
       <LoginPopup loginOpen={loginOpen} showLogin={showLogin} />
-      <MobileMenu isMobileMenuVisible={isMobileMenuVisible} setMobileMenuVisible={setMobileMenuVisible} />
+      <MobileMenu loginOpen={loginOpen} showLogin={showLogin} isMobileMenuVisible={isMobileMenuVisible} setMobileMenuVisible={setMobileMenuVisible} />
       <Header loginOpen={loginOpen} showLogin={showLogin} isMobileMenuVisible={isMobileMenuVisible} setMobileMenuVisible={setMobileMenuVisible} />
       {children}
       <Footer />

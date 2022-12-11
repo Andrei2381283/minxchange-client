@@ -4,7 +4,7 @@ import { useTheme } from "../../theme/theme";
 import { login } from "../../utils/api";
 import { useTranslation } from "../../utils/translate";
 import GreenBtn from "../greenBtn/greenBtn";
-import { LoginPopupContainer, LoginPopupDiv, LoginPopupInput } from "./styles";
+import { LoginPopupContainer, LoginPopupDiv, LoginPopupHeader, LoginPopupInput } from "./styles";
 
 const LoginPopup = ({ loginOpen, showLogin }) => {
 
@@ -25,8 +25,9 @@ const LoginPopup = ({ loginOpen, showLogin }) => {
 
     return loginOpen ? <LoginPopupContainer onClick={(event) => event.nativeEvent.path.length == 6 && showLogin(false)}>
         <LoginPopupDiv theme={theme}>
+            <LoginPopupHeader>{t("auth")}</LoginPopupHeader>
             <LoginPopupInput onChange={({ target }) => setData({...data, email: target.value})} placeholder="email" />
-            <LoginPopupInput onChange={({ target }) => setData({...data, password: target.value })} placeholder="password" />
+            <LoginPopupInput type="password" onChange={({ target }) => setData({...data, password: target.value })} placeholder="password" />
             <GreenBtn onClick={submit} small style={{marginTop: "1rem"}}>{t("login")}</GreenBtn>
         </LoginPopupDiv>
     </LoginPopupContainer> : ""

@@ -5,7 +5,7 @@ import GreenBtn from '../greenBtn/greenBtn';
 import LightBtn from '../lightBtn/lightBtn';
 import { MobileMenuContainer, MobileMenuDiv, MobileMenuLink } from './styles';
 
-const MobileMenu = ({ isMobileMenuVisible, setMobileMenuVisible }) => {
+const MobileMenu = ({ isMobileMenuVisible, setMobileMenuVisible, showLogin }) => {
 
     const { t } = useTranslation("header");
 
@@ -29,7 +29,7 @@ const MobileMenu = ({ isMobileMenuVisible, setMobileMenuVisible }) => {
                     <MobileMenuLink scroll={false} href="/#howItWorksBlock">{t("how-works")}</MobileMenuLink>
                     <MobileMenuLink href="/funds">{t("withdraw")}</MobileMenuLink>
                     <GreenBtn style={{ width: "auto", marginTop: "20px" }} small={true}>{t("reg", { ns: "common" })}</GreenBtn>
-                    <LightBtn style={{ width: "auto", marginTop: "10px" }} >{t("login", { ns: "common" })}</LightBtn>
+                    <LightBtn onClick={() => showLogin(true)} style={{ width: "auto", marginTop: "10px" }} >{t("login", { ns: "common" })}</LightBtn>
                 </MobileMenuDiv>
             }
         </ThemeContext.Consumer>

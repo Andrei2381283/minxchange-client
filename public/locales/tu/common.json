@@ -4,5 +4,6 @@
     "start": "Başlat",
     "invite": "Davet etmek",
     "search": "Arama",
-    "all": "Tümü"
+    "all": "Tümü",
+    "auth": "Yetki"
 }
