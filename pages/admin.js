@@ -104,7 +104,7 @@ export default function Admin(props) {
                     ))}
                 </AdminDropDown>
             ))}
-            <AdminSave onClick={Save}>Save</AdminSave>
+            <AdminSave onClick={Save}>Сохранить</AdminSave>
         </AdminSection>
         <AdminSection>
             <WithdrawBlock admin={true}>
