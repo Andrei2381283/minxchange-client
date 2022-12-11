@@ -1,4 +1,5 @@
-const { default: styled } = require("styled-components");
+import Link from "next/link";
+import styled from "styled-components";
 
 export const AdminSection = styled.section`
     display: flex;
@@ -25,4 +26,11 @@ export const AdminSave = styled.button`
         background: white;
         color: black;
     }
+`
+
+export const AdminBack = styled(Link)`
+    text-align: center;
+    margin: 0 auto 100px;
+    font-size: 20px;
+    text-decoration: none;
 `

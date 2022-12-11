@@ -7,6 +7,7 @@ import { GlobalStyle } from '../../styles/globals.js'
 import { ThemeContext, themes } from '../../theme/theme';
 import MobileMenu from '../mobileMenu/mobileMenu';
 import { TranslationContext, useTranslation } from '../../utils/translate';
+import LoginPopup from '../loginPopup/loginPopup';
 
 function Page({ children, _theme, lang, ns }) {
   const [theme, setTheme] = useState(themes[_theme.toLowerCase()]);
@@ -18,6 +19,8 @@ function Page({ children, _theme, lang, ns }) {
 
   const [isMobileMenuVisible, setMobileMenuVisible] = useState(false);
 
+  const [loginOpen, showLogin] = useState(false);
+
   return (
     <ThemeContext.Provider value={{ theme: theme, changeTheme: changeTheme }}>
       <Head>
@@ -25,8 +28,9 @@ function Page({ children, _theme, lang, ns }) {
         <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, width=device-width" />
       </Head>
       <GlobalStyle theme={theme} />
+      <LoginPopup loginOpen={loginOpen} showLogin={showLogin} />
       <MobileMenu isMobileMenuVisible={isMobileMenuVisible} setMobileMenuVisible={setMobileMenuVisible} />
-      <Header isMobileMenuVisible={isMobileMenuVisible} setMobileMenuVisible={setMobileMenuVisible} />
+      <Header loginOpen={loginOpen} showLogin={showLogin} isMobileMenuVisible={isMobileMenuVisible} setMobileMenuVisible={setMobileMenuVisible} />
       {children}
       <Footer />
     </ThemeContext.Provider>

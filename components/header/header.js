@@ -7,7 +7,7 @@ import { HeaderContainer, HeaderLink, HeaderMobileMenu, HeaderMobileMenuLine, He
 import GreenBtn from '../greenBtn/greenBtn';
 import LightBtn from '../lightBtn/lightBtn';
 
-const Header = ({ isMobileMenuVisible, setMobileMenuVisible }) => {
+const Header = ({ isMobileMenuVisible, setMobileMenuVisible, showLogin }) => {
 
     const { t, i18n } = useTranslation("header");
     
@@ -34,7 +34,7 @@ const Header = ({ isMobileMenuVisible, setMobileMenuVisible }) => {
         </ThemeContext.Consumer>
         <ChangeLang />
         <GreenBtn $pcElement small={true} style={{marginLeft: "2.5em"}}>{t("reg", {ns: "common"})}</GreenBtn>
-        <LightBtn $pcElement style={{marginLeft: "0.5em"}}>{t("login", {ns: "common"})}</LightBtn>
+        <LightBtn $pcElement style={{marginLeft: "0.5em"}} onClick={() => showLogin(true)}>{t("login", {ns: "common"})}</LightBtn>
     </HeaderContainer>
 }
 

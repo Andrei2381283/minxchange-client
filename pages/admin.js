@@ -3,7 +3,7 @@ import cookie from "cookie";
 import AdminDropDown from "../components/adminDropDown/adminDropDown";
 import ContentEdit from "../components/contentEdit/contentEdit";
 import WithdrawBlock from "../components/withdrawBlock/withdrawBlock";
-import { AdminSave, AdminSection } from "../styles/admin";
+import { AdminBack, AdminSave, AdminSection } from "../styles/admin";
 import { getContent, saveContentItem } from "../utils/api";
 import { GlobalStyle } from "../styles/globals";
 import { themes } from "../theme/theme";
@@ -29,19 +29,33 @@ export async function getServerSideProps({ req }) {
     };
 }
 
+
+const trData = {
+    common: "Разное",
+    footer: "Нижний колонтитул",
+    funds: "Страница \"Ввод вывод средств\"",
+    header: "Верхний колонтитул",
+    index: "Главная страница",
+    cookie: "Страница \"Политика использования cookie\"",
+    policy: "Страница \"Политика конфиденциальности\"",
+    terms: "Страница \"Пользовательское соглашение\"",
+    use: "Страница \"Условия использования\""
+}
+
 export default function Admin(props) {
+    //console.log(cookie.parse(document.cookie));
+    const [init, setInit] = useState(false);
 
     const [content, setContent] = useState([]);
 
-    /* useEffect(() => {
-        if(!content.length)getContent("").then(setContent);
-    }) */
-
-    if(!content.length) getContent("").then(setContent);
-    
-    /* const content = await getContent();
-
-    console.log(content); */
+    useEffect(() => {
+        if(!init) {
+            setInit(true);
+            (async () => {
+                setContent(await getContent(""));
+            })();
+        }
+    })
 
     const data = {};
 
@@ -65,10 +79,11 @@ export default function Admin(props) {
     return  <>
         <GlobalStyle theme={themes.light} />
         <AdminSection>
+            <AdminBack href="/">Смотреть Mintxchange</AdminBack>
             {Object.keys(data).map(ns => (
-                <AdminDropDown /* changedItems={changedItems} titleField="headerContent" items={Object.keys(data[ns]).map(v => Object.keys(data[ns][v]).map(v2 => data[ns][v][v2])).flat(Infinity)} */ key={ns} title={ns}>
+                <AdminDropDown /* changedItems={changedItems} titleField="headerContent" items={Object.keys(data[ns]).map(v => Object.keys(data[ns][v]).map(v2 => data[ns][v][v2])).flat(Infinity)} */ key={ns} title={trData[ns] || ns}>
                     {Object.keys(data[ns]).map(elem => (
-                        <AdminDropDown /* changedItems={changedItems} titleField="idContent" items={Object.keys(data[ns][elem]).map(v =>  data[ns][elem][v]).flat(Infinity)} */ key={elem} title={elem}>
+                        <AdminDropDown /* changedItems={changedItems} titleField="idContent" items={Object.keys(data[ns][elem]).map(v =>  data[ns][elem][v]).flat(Infinity)} */ key={elem} title={(data[ns][elem].ru?.textContent || "").split(" ").slice(0, 10).join(" ") ||/* trData[elem] ||  */elem}>
                             <ContentEdit changedItems={changedItems} data={data[ns][elem]} />
                         </AdminDropDown>
                     ))}
