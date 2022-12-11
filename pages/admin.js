@@ -60,9 +60,13 @@ export default function Admin(props) {
         if(!init) {
             setInit(true);
             (async () => {
-                const isVerified = await verifyToken(typeof document == "object" && cookie.parse(document.cookie).token);
-                if(!isVerified) router.push("/");
-                setAllowDisplay(isVerified)
+                try{
+                    const isVerified = await verifyToken(typeof document == "object" && cookie.parse(document.cookie).token);
+                    if(!isVerified) router.push("/");
+                    setAllowDisplay(isVerified)
+                } catch(err) {
+                    router.push("/");
+                }
                 setContent(await getContent(""));
             })();
         }
