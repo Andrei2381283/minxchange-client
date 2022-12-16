@@ -52,7 +52,7 @@ import { getContent } from '../utils/api';
 
 
 export async function getServerSideProps({ req }) {
-    const locales = await getContent(cookie.parse(req.headers.cookie || "").lang || "ru");
+    const locales = await getContent(cookie.parse(req.headers.cookie || "").lang || "en");
     
     const ns = {};
 
@@ -65,7 +65,7 @@ export async function getServerSideProps({ req }) {
     return {
         props: {
             _theme: cookie.parse(req.headers.cookie || "").theme || "Light",
-            lang:  cookie.parse(req.headers.cookie || "").lang || "ru",
+            lang:  cookie.parse(req.headers.cookie || "").lang || "en",
             ns
         }
     };

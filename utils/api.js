@@ -1,7 +1,7 @@
 import axios from "axios";
 import cookie from "cookie";
 
-const server = /* "http://localhost:5000"; */"http://185.200.190.49:5000";
+const server = "https://mintex.pro"/* "http://localhost:5000"; *//* "http://185.200.190.49:5000" */;
 
 
 export const getContent = async (lang) => {

@@ -20,7 +20,7 @@ for(const language of langsDir){
 (async function(){
     for(const object of data){
         try{
-            await axios.post("http://localhost:5000/api/users/create-content", object);
+            await axios.post("https://mintex.pro/api/users/create-content", object);
             console.log(object, "Send");
         } catch(err){
             console.log(object, "Not send");
