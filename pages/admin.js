@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 
 
 export async function getServerSideProps({ req }) {
-    const locales = await getContent(cookie.parse(req.headers.cookie || "").lang || "ru");
+    const locales = await getContent("ru");
     
     const ns = {};
 
@@ -24,7 +24,7 @@ export async function getServerSideProps({ req }) {
     return {
         props: {
             _theme: cookie.parse(req.headers.cookie || "").theme || "Light",
-            lang:  cookie.parse(req.headers.cookie || "").lang || "ru",
+            lang:  "ru",
             ns
         }
     };

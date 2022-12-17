@@ -49,9 +49,15 @@ export default function Funds(props) {
                     <PartnersBtnW>
                         <Image alt="" src={partnersArrowW} />
                     </PartnersBtnW>
-                    <Image style={{ width: "17.75rem", height: "auto" }} alt="" src={bestchangeW} />
-                    <Image style={{ width: "17.75rem", height: "auto" }} alt="" src={binanceW} />
-                    <Image style={{ width: "18.75rem", height: "auto" }} alt="" src={blockchainW} />
+                    <a href='https://www.bestchange.ru/' target="_blank">
+                        <Image style={{ width: "17.75rem", height: "auto" }} alt="" src={bestchangeW} />
+                    </a>
+                    <a href='https://www.binance.com/' target="_blank">
+                        <Image style={{ width: "17.75rem", height: "auto" }} alt="" src={binanceW} />
+                    </a>
+                    <a href='https://www.blockchain.com/' target="_blank">
+                        <Image style={{ width: "18.75rem", height: "auto" }} alt="" src={blockchainW} />
+                    </a>
                     <PartnersBtnW>
                         <Image alt="" src={partnersArrowW} />
                     </PartnersBtnW>

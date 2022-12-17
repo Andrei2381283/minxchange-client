@@ -235,9 +235,15 @@ export default function Home(props) {
                     <PartnersBtn>
                         <Image alt="" src={partnersArrow} />
                     </PartnersBtn>
-                    <Image style={{ width: "17.75rem", height: "auto" }} alt="" src={bestchange} />
-                    <Image style={{ width: "17.75rem", height: "auto" }} alt="" src={binance} />
-                    <Image style={{ width: "18.75rem", height: "auto" }} alt="" src={blockchain} />
+                    <a href='https://www.bestchange.ru/' target="_blank">
+                        <Image style={{ width: "17.75rem", height: "auto" }} alt="" src={bestchange} />
+                    </a>
+                    <a href='https://www.binance.com/' target="_blank">
+                        <Image style={{ width: "17.75rem", height: "auto" }} alt="" src={binance} />
+                    </a>
+                    <a href='https://www.blockchain.com/' target="_blank">
+                        <Image style={{ width: "18.75rem", height: "auto" }} alt="" src={blockchain} />
+                    </a>
                     <PartnersBtn>
                         <Image alt="" src={partnersArrow} />
                     </PartnersBtn>

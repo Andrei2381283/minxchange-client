@@ -45,12 +45,14 @@ const WithdrawList = ({ currencies, updateCurrencies, type, selected2, editCurre
             icon: "",
             title: "Empty",
             short: "Empty",
-            deps: [{id: selected2._id, ratio: 1}],
+            deps: selected2 ? [{id: selected2._id, ratio: 1}] : [],
             minCount: 1
         });
-        selected2.deps.push({id: item._id, ratio: 1});
-        if(!editCurrencies[selected2._id]) editCurrencies[selected2._id] = {};
-        editCurrencies[selected2._id].deps = selected2.deps;
+        if(selected2) {
+            selected2.deps.push({id: item._id, ratio: 1});
+            if(!editCurrencies[selected2._id]) editCurrencies[selected2._id] = {};
+            editCurrencies[selected2._id].deps = selected2.deps;
+        }
         //console.log(editCurrencies);
         updateCurrencies();
         select(selectedItem);

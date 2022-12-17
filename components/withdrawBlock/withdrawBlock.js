@@ -109,6 +109,8 @@ const WithdrawBlock = ({ admin, children, style }) => {
             if(!editCurrencies[item2._id]) editCurrencies[item2._id] = {};
             editCurrencies[item2._id].deps = item2.deps;
 
+            setPrice(val);
+            
             return;
         }
         //console.log(2, val, Number((currencies[firstSelected].deps.find(e2 => e2.id == giveArr[secondSelected]._id).ratio * val).toFixed(5)));

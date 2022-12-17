@@ -597,6 +597,17 @@ export const FundsSection = styled(SectionBlock)`
     }
 `
 
+export const TermsSection = styled(FundsSection)`
+    align-items: center;
+    /* margin-left: 0;
+    margin-right: 0; */
+`
+
+export const TermsImage = styled(Image)`
+    width: 100%;
+    height: auto;
+`
+
 export const FundsTitle = styled.h3`
     font-weight: 500;
     font-size: 2rem;
