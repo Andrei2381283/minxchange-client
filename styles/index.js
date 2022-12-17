@@ -237,20 +237,22 @@ export const GreenShadow1 = styled.div`
     top: 8.25em;
     width: 7.8125em;
     height: 6.75em;
-    z-index: -1;
+    /* z-index: -1; */
     background: #38E7BA;
     filter: blur(145px);
+    opacity: 0.83;
 `
 
 export const GreenShadow2 = styled.div`
     position: absolute;
     left: 20.6875em;
     top: 56px;
-    width: 3.5em;
+    width: 15.6875em;
     height: 13.5625em;
-    z-index: -1;
+    /* z-index: -1; */
     background: #38E7BA;
     filter: blur(145px);
+    opacity: 0.83;
 `
 
 export const WhiteShadow = styled.div`

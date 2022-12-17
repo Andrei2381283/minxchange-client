@@ -5,6 +5,8 @@ export const WithdrawBlockContainer = styled.div`
     display: flex;
     margin-top: 3.5rem;
 
+    width: 100%;
+
     @media (max-width: 998px) {
         flex-direction: column;
     }
@@ -19,6 +21,8 @@ export const WithdrawBlockDiv = styled.div`
     border-radius: 3px;
     ${props => props.theme == "Light" ? "" : "backdrop-filter: blur(15px);"}
     position: relative;
+
+    width: 100%;
 
     &:not(:first-of-type){
         margin-left: 1.25rem;
@@ -115,12 +119,34 @@ export const WithdrawBlockBtnTime = styled.span`
 `
 
 export const WithdrawBlockDivTitle = styled.span`
-    font-size: 1.25rem;
-    font-weight: 500;
-    position: absolute;
+    font-size: 2rem;
+    font-weight: 600;
     width: 100%;
-    top: -2rem;
-    transform: translateY(-100%);
     text-align: center;
-    left: 0;
+`
+
+export const WithdrawInput = styled.input`
+    width: 100%;
+
+    margin-top: 3rem;
+    padding: 0.75rem 0.25rem;
+
+    font-size: 1.5rem;
+    font-weight: 300;
+    font-family: 'Gilroy';
+
+    background: transparent;
+    color: ${props => props.theme == "Light" ? "#162329" : "white"};
+    border: 0;
+    border-bottom: 1px solid ${props => props.theme == "Light" ? "black" : "rgba(255,255,255,0.07)"};
+    outline: none;
+`
+
+export const WithdrawShortDiv = styled.div`
+    display: flex;
+    margin-top: 2rem;
+
+    align-items: center;
+
+    font-size: 1.5rem;
 `

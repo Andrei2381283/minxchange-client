@@ -1,94 +1,140 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import { WithdrawBlockBtn, WithdrawBlockBtn3div, WithdrawBlockBtn3divdiv, WithdrawBlockBtnTime, WithdrawBlockContainer, WithdrawBlockDiv, WithdrawBlockDivTitle, WithdrawBlockExchangeImg, WithdrawBlockFirstBlockBtnDiv, WithdrawBlockRemove, WithdrawBlockSubText, WithdrawBlockSubTextInput, WithdrawBlockText, WithdrawBlockTopDiv } from './styles';
+import { WithdrawBlockBtn, WithdrawBlockBtn3div, WithdrawBlockBtn3divdiv, WithdrawBlockBtnTime, WithdrawBlockContainer, WithdrawBlockDiv, WithdrawBlockDivTitle, WithdrawBlockExchangeImg, WithdrawBlockFirstBlockBtnDiv, WithdrawBlockRemove, WithdrawBlockSubText, WithdrawBlockSubTextInput, WithdrawBlockText, WithdrawBlockTopDiv, WithdrawInput, WithdrawShortDiv } from './styles';
 import btc from "../../assets/btc.svg";
+import tetherExchange from "../../assets/tetherExchange.svg";
 import exchange from "../../assets/exchange.svg";
 import del from "../../assets/del.svg";
 import WithdrawBlockSearch from './withdrawBlockSearch/withdrawBlockSearch';
 import { ThemeContext } from '../../theme/theme';
 import { useTranslation } from '../../utils/translate';
 import AddCurrency from './addCurrency/addCurrency';
-import { getCurrencies, getCurrenciesList1, getCurrenciesList2, removeCurrenciesList1, removeCurrenciesList2, updateCurrenciesList2 } from '../../utils/api';
+import { editCurrency, getCurrencies } from '../../utils/api';
+import WithdrawList from './withdrawList/withdrawList';
+import GreenBtn from '../greenBtn/greenBtn';
 
-const priceChanges = {};
-
-setInterval(async () => {
-    if(Object.keys(priceChanges).length) {
-        const arr = [];
-        for(const i in priceChanges){
-            arr.push({...priceChanges[i], index: i});
-            delete priceChanges[i];
-            await updateCurrenciesList2(arr);
-        }
+/* const currencies = [
+    {
+        _id: "asdqweqwe123",
+        icon: tetherExchange,
+        title: "Tether USDT (TRC20)",
+        short: "USDT",
+        deps: [{id: "asdqweqwe124", ratio: 22}],
+        minCount: 1
+    },
+    {
+        _id: "asdqweqwe124",
+        icon: btc,
+        title: "Bitcoin (BTC)",
+        short: "BTC",
+        deps: [{id: "asdqweqwe123", ratio: 1/22}],
+        minCount: 1
     }
-}, 2000)
+]; */
+
+const editCurrencies = {};
 
 const WithdrawBlock = ({ admin, children, style }) => {
 
     const { t } = useTranslation("index");
 
-    const [init, setInit] = useState(false);
+    const [ editMode, setEditMode ] = useState(false);
 
-    const [currencies, setCurrencies] = useState([]);
+    const [ init, setInit ] = useState(false);
+    const [ currencies, setCurrencies ] = useState([]);
 
-    const [list1, setList1] = useState([]);
-
-    const [list2, setList2] = useState([]);
+    const updateCurrencies = async () => {
+        setCurrencies(await getCurrencies());
+    }
 
     useEffect(() => {
-        if(!init) {
+        if(!init){
             setInit(true);
             (async () => {
-                setCurrencies(await getCurrencies());
-                setList1(await getCurrenciesList1());
-                setList2(await getCurrenciesList2());
+                await updateCurrencies();
             })();
         }
-    })
+    });
 
-    const [giveMode, setGiveMode] = useState(0);
-    const changeGiveMode = (mode) => () => setGiveMode(mode);
-
-    const [giveCrypto, setGiveCrypto] = useState(0);
-    const changeGiveCrypto = (mode) => () => setGiveCrypto(mode);
-
-    const [getMode, setGetMode] = useState(0);
-    const changeGetMode = (mode) => () => setGetMode(mode);
-
-    const [getCrypto, setGetCrypto] = useState(0);
-    const changeGetCrypto = (mode) => () => setGetCrypto(mode);
-
-
-    const currenciesMap = {};
-
-    for(const currencie of currencies){
-        currenciesMap[currencie._id] = currencie;
-    }
-
-
-    const changePrice = (cur, index) => ({ target }) => {
-        //console.log(cur, target.value);
-        target.value = target.value.replace(/[^0-9\.]+/g, "");
-        priceChanges[index] = {price: Number(target.value)};
-        list2[index].price = target.value;
-        setList2(list2);
-    }
-
-    const removeCur = (index, type) => () => {
-        console.log(index, type);
-        const removeCurrenciesList = !type ? removeCurrenciesList1 : removeCurrenciesList2;
-        removeCurrenciesList(index);
-        if(type){
-            if(giveCrypto == index)changeGiveCrypto(Math.max(index - 1, 0));
-            list2.splice(index, 1);
-            setList2(list2);
-        } else {
-            if(getCrypto == index)changeGetMode(Math.max(index - 1, 0));
-            list1.splice(index, 1);
-            setList1(list1);
+    useEffect(() => {
+        if(!editMode){
+            (async () => {
+                const needUpdate = Object.keys(editCurrencies).length;
+                for(const i in editCurrencies){
+                    await editCurrency(i, editCurrencies[i]);
+                    delete editCurrencies[i];
+                }
+                if(needUpdate){
+                    await updateCurrencies();
+                    setSecondSelected(secondSelected);
+                }
+            })();
         }
+    }, [editMode]);
+
+    const [ firstSelected, setFirstSelected ] = useState(0);
+    const [ secondSelected, setSecondSelected ] = useState(0);
+
+    const giveArr = currencies.filter(e => e.deps.find(e2 => e2.id == currencies[firstSelected]._id));
+
+    const [ count, setCount ] = useState(currencies[firstSelected] && currencies[firstSelected].minCount || 0);
+    const [ price, setPrice ] = useState(giveArr[secondSelected] && Number((giveArr[secondSelected].deps.find(e2 => e2.id == currencies[firstSelected]._id).ratio * currencies[firstSelected].minCount).toFixed(5)) || 0);
+
+    const changeCount = ({ target } = {}) => {
+        if(editMode) return;
+        if(!target) target = {value: count};
+        if(!Number(target.value)) return;
+        const val = target.value = Math.max(Number(target.value), currencies[firstSelected].minCount);
+        //console.log(1, val, Number((giveArr[secondSelected].deps.find(e2 => e2.id == currencies[firstSelected]._id).ratio * val).toFixed(5)));
+        setCount(val);
+        setPrice(Number((giveArr[secondSelected].deps.find(e2 => e2.id == currencies[firstSelected]._id).ratio * val).toFixed(5)));
     }
 
+    const changePrice = ({ target } = {}) => {
+        if(!target) target = {value: price};
+        if(!Number(target.value)) return;
+        const val = target.value = Number(target.value);
+        if(editMode){
+            if(!target) return;
+
+            const item1 = giveArr[secondSelected];
+            const deps1 = item1.deps.find(e => e.id == currencies[firstSelected]._id);
+            deps1.ratio = val;
+            if(!editCurrencies[item1._id]) editCurrencies[item1._id] = {};
+            editCurrencies[item1._id].deps = item1.deps;
+
+            const item2 = currencies[firstSelected];
+            const deps2 = item2.deps.find(e => e.id == giveArr[secondSelected]._id);
+            deps2.ratio = 1/val;
+            if(!editCurrencies[item2._id]) editCurrencies[item2._id] = {};
+            editCurrencies[item2._id].deps = item2.deps;
+
+            return;
+        }
+        //console.log(2, val, Number((currencies[firstSelected].deps.find(e2 => e2.id == giveArr[secondSelected]._id).ratio * val).toFixed(5)));
+        setPrice(val);
+        setCount(Number((currencies[firstSelected].deps.find(e2 => e2.id == giveArr[secondSelected]._id).ratio * val).toFixed(5)));
+    }
+
+    const changeShortName = (element) => ({ target }) => {
+        if(!editCurrencies[element._id]) editCurrencies[element._id] = {};
+        editCurrencies[element._id].short = element.short = target.value;
+    }
+
+    useEffect(() => {
+        changePrice();
+    }, [secondSelected]);
+
+    useEffect(() => {
+        changeCount();
+    }, [firstSelected]);
+
+    useEffect(() => {
+        if(!count && currencies[firstSelected] && giveArr[secondSelected]){
+            //console.log("Hi!")
+            changeCount({ target: { value: 1 }});
+        }
+    });
 
     return <WithdrawBlockContainer style={style || {}}>
         <ThemeContext.Consumer>
@@ -96,211 +142,60 @@ const WithdrawBlock = ({ admin, children, style }) => {
                 <>
                     <WithdrawBlockDiv theme={theme.name}>
                         <WithdrawBlockDivTitle>{t("give")}</WithdrawBlockDivTitle>
-                        <WithdrawBlockTopDiv>
-                            <WithdrawBlockBtn theme={theme.name} selected={giveMode == 0} onClick={changeGiveMode(0)} small >{t("all", {ns:"common"})}</WithdrawBlockBtn>
-                            {currencies.map((v, i) => 
-                                <WithdrawBlockBtn key={(i + 1)} theme={theme.name} selected={giveMode == (i + 1)} onClick={changeGiveMode((i + 1))} small style={{ marginLeft: "0.5rem" }}>{v.symbol}</WithdrawBlockBtn>)
-                            }
-                        </WithdrawBlockTopDiv>
-                        <WithdrawBlockSearch theme={theme.name} />
-                        {list1.map((v, i) => !giveMode || currencies[giveMode - 1]._id == v.id ? (
-                            <WithdrawBlockBtn style={i == 0 ? { marginTop: "1rem" } : {}} key={i} theme={theme.name} selected={giveCrypto == i} onClick={changeGiveCrypto(i)}>
-                                <WithdrawBlockFirstBlockBtnDiv>
-                                    <Image width="24" height="24" alt="" src={currenciesMap[v.id].icon} />
-                                    <WithdrawBlockText>{currenciesMap[v.id].name}</WithdrawBlockText>
-                                </WithdrawBlockFirstBlockBtnDiv>
-                                {admin && <WithdrawBlockRemove alt="Delete" src={del} onClick={removeCur(i, 0)} /> || ""}
-                            </WithdrawBlockBtn>
-                        ) : "")}
-                        {admin && <AddCurrency type={0} list={list1} setList={setList1} currencies={currencies} /> || ""}
+                        <WithdrawList 
+                            updateCurrencies={updateCurrencies} 
+                            type={0} 
+                            selected2={giveArr[secondSelected]} 
+                            editCurrencies={editCurrencies} 
+                            editMode={editMode} 
+                            onSelectItem={setFirstSelected} 
+                            items={currencies}
+                            currencies={currencies}
+                        />
+                        <WithdrawInput 
+                            onChange={changeCount} 
+                            value={count} 
+                            theme={theme.name} 
+                            placeholder={currencies[firstSelected]?.short || ""} 
+                        />
+                        {editMode && <WithdrawShortDiv>
+                            Short name: 
+                            <WithdrawInput 
+                                style={{ margin: "0", width: "auto", marginLeft: "1rem" }}
+                                onChange={changeShortName(currencies[firstSelected])} 
+                                defaultValue={currencies[firstSelected]?.short || ""} 
+                                theme={theme.name}
+                            />
+                        </WithdrawShortDiv> || ""}
                     </WithdrawBlockDiv>
                     <WithdrawBlockDiv theme={theme.name}>
                         <WithdrawBlockDivTitle>{t("get")}</WithdrawBlockDivTitle>
-                        <WithdrawBlockTopDiv>
-                            <WithdrawBlockBtn theme={theme.name} selected={getMode == 0} onClick={changeGetMode(0)} small >{t("all", {ns:"common"})}</WithdrawBlockBtn>
-                            {currencies.map((v, i) => 
-                                <WithdrawBlockBtn key={(i + 1)} theme={theme.name} selected={getMode == (i + 1)} onClick={changeGetMode((i + 1))} small style={{ marginLeft: "0.5rem" }}>{v.symbol}</WithdrawBlockBtn>)
-                            }
-                        </WithdrawBlockTopDiv>
-                        <WithdrawBlockSearch theme={theme.name} />
-                        {list2.map((v, i) => !getMode || currencies[getMode - 1]._id == v.id ? (
-                            <WithdrawBlockBtn style={i == 0 ? { marginTop: "1rem" } : {}} key={i} theme={theme.name} selected={getCrypto == i} onClick={changeGetCrypto(i)}>
-                                <WithdrawBlockFirstBlockBtnDiv>
-                                    <Image width="24" height="24" alt="" src={currenciesMap[v.id].icon} />
-                                    <WithdrawBlockText>{currenciesMap[v.id].name}</WithdrawBlockText>
-                                </WithdrawBlockFirstBlockBtnDiv>
-                                {
-                                    admin ? 
-                                    <WithdrawBlockSubTextInput theme={theme.name} selected={getCrypto == i} onChange={changePrice(v,i)} defaultValue={v.price} /> :
-                                    <WithdrawBlockSubText theme={theme.name} selected={getCrypto == i}>{v.price}</WithdrawBlockSubText>
-                                }
-                                {admin && <WithdrawBlockRemove alt="Delete" src={del} onClick={removeCur(i, 1)} /> || ""}
-                            </WithdrawBlockBtn>
-                        ) : "")}
-                        {admin && <AddCurrency type={1} list={list2} setList={setList2} currencies={currencies} /> || ""}
-                    </WithdrawBlockDiv>
-                    <WithdrawBlockDiv theme={theme.name}>
-                        <WithdrawBlockDivTitle>{t("trades")}</WithdrawBlockDivTitle>
-                        <WithdrawBlockBtn theme={theme.name}>
-                            <WithdrawBlockBtn3div>
-                                <WithdrawBlockBtn3divdiv>
-                                    <WithdrawBlockFirstBlockBtnDiv>
-                                        <Image alt="" src={btc} />
-                                        <WithdrawBlockText>Bitcoin (BTC)</WithdrawBlockText>
-                                    </WithdrawBlockFirstBlockBtnDiv>
-                                    <WithdrawBlockSubText theme={theme.name}>1 258 049. 33</WithdrawBlockSubText>
-                                </WithdrawBlockBtn3divdiv>
-                                <WithdrawBlockExchangeImg alt="" src={exchange} />
-                                <WithdrawBlockBtn3divdiv>
-                                    <WithdrawBlockFirstBlockBtnDiv>
-                                        <Image alt="" src={btc} />
-                                        <WithdrawBlockText>Bitcoin (BTC)</WithdrawBlockText>
-                                    </WithdrawBlockFirstBlockBtnDiv>
-                                    <WithdrawBlockSubText theme={theme.name}>1 258 049. 33</WithdrawBlockSubText>
-                                </WithdrawBlockBtn3divdiv>
-                                <WithdrawBlockBtnTime>14:16</WithdrawBlockBtnTime>
-                            </WithdrawBlockBtn3div>
-                        </WithdrawBlockBtn>
-                        <WithdrawBlockBtn theme={theme.name}>
-                            <WithdrawBlockBtn3div>
-                                <WithdrawBlockBtn3divdiv>
-                                    <WithdrawBlockFirstBlockBtnDiv>
-                                        <Image alt="" src={btc} />
-                                        <WithdrawBlockText>Bitcoin (BTC)</WithdrawBlockText>
-                                    </WithdrawBlockFirstBlockBtnDiv>
-                                    <WithdrawBlockSubText theme={theme.name}>1 258 049. 33</WithdrawBlockSubText>
-                                </WithdrawBlockBtn3divdiv>
-                                <WithdrawBlockExchangeImg alt="" src={exchange} />
-                                <WithdrawBlockBtn3divdiv>
-                                    <WithdrawBlockFirstBlockBtnDiv>
-                                        <Image alt="" src={btc} />
-                                        <WithdrawBlockText>Bitcoin (BTC)</WithdrawBlockText>
-                                    </WithdrawBlockFirstBlockBtnDiv>
-                                    <WithdrawBlockSubText theme={theme.name}>1 258 049. 33</WithdrawBlockSubText>
-                                </WithdrawBlockBtn3divdiv>
-                                <WithdrawBlockBtnTime>14:16</WithdrawBlockBtnTime>
-                            </WithdrawBlockBtn3div>
-                        </WithdrawBlockBtn>
-                        <WithdrawBlockBtn theme={theme.name}>
-                            <WithdrawBlockBtn3div>
-                                <WithdrawBlockBtn3divdiv>
-                                    <WithdrawBlockFirstBlockBtnDiv>
-                                        <Image alt="" src={btc} />
-                                        <WithdrawBlockText>Bitcoin (BTC)</WithdrawBlockText>
-                                    </WithdrawBlockFirstBlockBtnDiv>
-                                    <WithdrawBlockSubText theme={theme.name}>1 258 049. 33</WithdrawBlockSubText>
-                                </WithdrawBlockBtn3divdiv>
-                                <WithdrawBlockExchangeImg alt="" src={exchange} />
-                                <WithdrawBlockBtn3divdiv>
-                                    <WithdrawBlockFirstBlockBtnDiv>
-                                        <Image alt="" src={btc} />
-                                        <WithdrawBlockText>Bitcoin (BTC)</WithdrawBlockText>
-                                    </WithdrawBlockFirstBlockBtnDiv>
-                                    <WithdrawBlockSubText theme={theme.name}>1 258 049. 33</WithdrawBlockSubText>
-                                </WithdrawBlockBtn3divdiv>
-                                <WithdrawBlockBtnTime>14:16</WithdrawBlockBtnTime>
-                            </WithdrawBlockBtn3div>
-                        </WithdrawBlockBtn>
-                        <WithdrawBlockBtn theme={theme.name}>
-                            <WithdrawBlockBtn3div>
-                                <WithdrawBlockBtn3divdiv>
-                                    <WithdrawBlockFirstBlockBtnDiv>
-                                        <Image alt="" src={btc} />
-                                        <WithdrawBlockText>Bitcoin (BTC)</WithdrawBlockText>
-                                    </WithdrawBlockFirstBlockBtnDiv>
-                                    <WithdrawBlockSubText theme={theme.name}>1 258 049. 33</WithdrawBlockSubText>
-                                </WithdrawBlockBtn3divdiv>
-                                <WithdrawBlockExchangeImg alt="" src={exchange} />
-                                <WithdrawBlockBtn3divdiv>
-                                    <WithdrawBlockFirstBlockBtnDiv>
-                                        <Image alt="" src={btc} />
-                                        <WithdrawBlockText>Bitcoin (BTC)</WithdrawBlockText>
-                                    </WithdrawBlockFirstBlockBtnDiv>
-                                    <WithdrawBlockSubText theme={theme.name}>1 258 049. 33</WithdrawBlockSubText>
-                                </WithdrawBlockBtn3divdiv>
-                                <WithdrawBlockBtnTime>14:16</WithdrawBlockBtnTime>
-                            </WithdrawBlockBtn3div>
-                        </WithdrawBlockBtn>
-                        <WithdrawBlockBtn theme={theme.name}>
-                            <WithdrawBlockBtn3div>
-                                <WithdrawBlockBtn3divdiv>
-                                    <WithdrawBlockFirstBlockBtnDiv>
-                                        <Image alt="" src={btc} />
-                                        <WithdrawBlockText>Bitcoin (BTC)</WithdrawBlockText>
-                                    </WithdrawBlockFirstBlockBtnDiv>
-                                    <WithdrawBlockSubText theme={theme.name}>1 258 049. 33</WithdrawBlockSubText>
-                                </WithdrawBlockBtn3divdiv>
-                                <WithdrawBlockExchangeImg alt="" src={exchange} />
-                                <WithdrawBlockBtn3divdiv>
-                                    <WithdrawBlockFirstBlockBtnDiv>
-                                        <Image alt="" src={btc} />
-                                        <WithdrawBlockText>Bitcoin (BTC)</WithdrawBlockText>
-                                    </WithdrawBlockFirstBlockBtnDiv>
-                                    <WithdrawBlockSubText theme={theme.name}>1 258 049. 33</WithdrawBlockSubText>
-                                </WithdrawBlockBtn3divdiv>
-                                <WithdrawBlockBtnTime>14:16</WithdrawBlockBtnTime>
-                            </WithdrawBlockBtn3div>
-                        </WithdrawBlockBtn>
-                        <WithdrawBlockBtn theme={theme.name}>
-                            <WithdrawBlockBtn3div>
-                                <WithdrawBlockBtn3divdiv>
-                                    <WithdrawBlockFirstBlockBtnDiv>
-                                        <Image alt="" src={btc} />
-                                        <WithdrawBlockText>Bitcoin (BTC)</WithdrawBlockText>
-                                    </WithdrawBlockFirstBlockBtnDiv>
-                                    <WithdrawBlockSubText theme={theme.name}>1 258 049. 33</WithdrawBlockSubText>
-                                </WithdrawBlockBtn3divdiv>
-                                <WithdrawBlockExchangeImg alt="" src={exchange} />
-                                <WithdrawBlockBtn3divdiv>
-                                    <WithdrawBlockFirstBlockBtnDiv>
-                                        <Image alt="" src={btc} />
-                                        <WithdrawBlockText>Bitcoin (BTC)</WithdrawBlockText>
-                                    </WithdrawBlockFirstBlockBtnDiv>
-                                    <WithdrawBlockSubText theme={theme.name}>1 258 049. 33</WithdrawBlockSubText>
-                                </WithdrawBlockBtn3divdiv>
-                                <WithdrawBlockBtnTime>14:16</WithdrawBlockBtnTime>
-                            </WithdrawBlockBtn3div>
-                        </WithdrawBlockBtn>
-                        <WithdrawBlockBtn theme={theme.name}>
-                            <WithdrawBlockBtn3div>
-                                <WithdrawBlockBtn3divdiv>
-                                    <WithdrawBlockFirstBlockBtnDiv>
-                                        <Image alt="" src={btc} />
-                                        <WithdrawBlockText>Bitcoin (BTC)</WithdrawBlockText>
-                                    </WithdrawBlockFirstBlockBtnDiv>
-                                    <WithdrawBlockSubText theme={theme.name}>1 258 049. 33</WithdrawBlockSubText>
-                                </WithdrawBlockBtn3divdiv>
-                                <WithdrawBlockExchangeImg alt="" src={exchange} />
-                                <WithdrawBlockBtn3divdiv>
-                                    <WithdrawBlockFirstBlockBtnDiv>
-                                        <Image alt="" src={btc} />
-                                        <WithdrawBlockText>Bitcoin (BTC)</WithdrawBlockText>
-                                    </WithdrawBlockFirstBlockBtnDiv>
-                                    <WithdrawBlockSubText theme={theme.name}>1 258 049. 33</WithdrawBlockSubText>
-                                </WithdrawBlockBtn3divdiv>
-                                <WithdrawBlockBtnTime>14:16</WithdrawBlockBtnTime>
-                            </WithdrawBlockBtn3div>
-                        </WithdrawBlockBtn>
-                        <WithdrawBlockBtn theme={theme.name}>
-                            <WithdrawBlockBtn3div>
-                                <WithdrawBlockBtn3divdiv>
-                                    <WithdrawBlockFirstBlockBtnDiv>
-                                        <Image alt="" src={btc} />
-                                        <WithdrawBlockText>Bitcoin (BTC)</WithdrawBlockText>
-                                    </WithdrawBlockFirstBlockBtnDiv>
-                                    <WithdrawBlockSubText theme={theme.name}>1 258 049. 33</WithdrawBlockSubText>
-                                </WithdrawBlockBtn3divdiv>
-                                <WithdrawBlockExchangeImg alt="" src={exchange} />
-                                <WithdrawBlockBtn3divdiv>
-                                    <WithdrawBlockFirstBlockBtnDiv>
-                                        <Image alt="" src={btc} />
-                                        <WithdrawBlockText>Bitcoin (BTC)</WithdrawBlockText>
-                                    </WithdrawBlockFirstBlockBtnDiv>
-                                    <WithdrawBlockSubText theme={theme.name}>1 258 049. 33</WithdrawBlockSubText>
-                                </WithdrawBlockBtn3divdiv>
-                                <WithdrawBlockBtnTime>14:16</WithdrawBlockBtnTime>
-                            </WithdrawBlockBtn3div>
-                        </WithdrawBlockBtn>
+                        <WithdrawList 
+                            updateCurrencies={updateCurrencies} 
+                            type={1} 
+                            selected2={currencies[firstSelected]} 
+                            editCurrencies={editCurrencies} 
+                            editMode={editMode} 
+                            onSelectItem={setSecondSelected} 
+                            items={giveArr} 
+                            currencies={currencies}
+                        />
+                        <WithdrawInput 
+                            onChange={changePrice} 
+                            {...(editMode ? {defaultValue: price} : {value: price})}
+                            theme={theme.name} 
+                            placeholder={giveArr[secondSelected]?.short || ""} 
+                        />
+                        {editMode && <WithdrawShortDiv>
+                            Short name: 
+                            <WithdrawInput 
+                                style={{ margin: "0", width: "auto", marginLeft: "1rem" }}
+                                onChange={changeShortName(giveArr[secondSelected])} 
+                                defaultValue={giveArr[secondSelected]?.short || ""} 
+                                theme={theme.name}
+                            />
+                        </WithdrawShortDiv> || ""}
+                        {admin && <GreenBtn onClick={() => setEditMode(!editMode)} style={{ marginTop: "2rem", width: "auto" }}>{editMode ? "Сохранить" : "Редактировать"}</GreenBtn> || ""}
                     </WithdrawBlockDiv>
                 </>
             )}

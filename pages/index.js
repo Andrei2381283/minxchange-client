@@ -105,8 +105,8 @@ export default function Home(props) {
                     <ThemeContext.Consumer>
                         {({ theme }) => (
                             <>
-                                <GreenShadow1 />
-                                <GreenShadow2 />
+                                {/* <GreenShadow1 />
+                                <GreenShadow2 /> */}
                                 <Image style={{ position: "absolute", left: "6.9375em", top: "2.15em", height: "auto", width: "29.75em" }} alt="" src={smartphone} />
                                         <WhiteShadow color={theme == themes.light ? "linear-gradient(180deg, rgba(250, 250, 250, 0) 0%, #FAFAFA 62.16%)" : "linear-gradient(180deg, rgba(4, 3, 16, 0) 0%, #040310 62.16%)"} />
                                 <PayeerImg alt="" src={payeerLeft} />

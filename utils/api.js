@@ -1,12 +1,12 @@
 import axios from "axios";
 import cookie from "cookie";
 
-const server = "https://mintex.pro"/* "http://localhost:5000"; *//* "http://185.200.190.49:5000" */;
+const server = "https://mintex.pro"/* "http://localhost:5000" *//* "http://185.200.190.49:5000" */;
 
 
 export const getContent = async (lang) => {
-
-    const res = await axios.get(server + "/api/users/get-content/" + lang);
+    //console.log(axios.get(server + "/api/users/get-content/" + lang));
+    const res = await axios.get(server + "/api/users/get-content/" + lang, { headers: { "Accept-Encoding": "gzip,deflate,compress" }  });
 
     return res.data;
 
@@ -14,7 +14,7 @@ export const getContent = async (lang) => {
 
 export const verifyToken = async (token) => {
 
-    const res = await axios.get(server + "/api/auth/verify", { headers: { "x-auth-token": token } });
+    const res = await axios.get(server + "/api/auth/verify", { headers: { "x-auth-token": token, "Accept-Encoding": "gzip,deflate,compress" } });
 
     return res.status == 200;
 
@@ -22,7 +22,7 @@ export const verifyToken = async (token) => {
 
 export const login = async (data) => {
 
-    const res = await axios.post(server + "/api/auth/login", data);
+    const res = await axios.post(server + "/api/auth/login", data, { headers: { "Accept-Encoding": "gzip,deflate,compress" } });
 
     return res.data;
 
@@ -37,11 +37,43 @@ export const saveContentItem = async (item) => {
         return;
     }
 
-    return await axios.put(server + "/api/users/update-content/" + item._id, item, { headers: { "x-auth-token": document && cookie.parse(document.cookie).token } });
+    return await axios.put(server + "/api/users/update-content/" + item._id, item, { headers: { "x-auth-token": document && cookie.parse(document.cookie).token, "Accept-Encoding": "gzip,deflate,compress" } });
 
 }
 
 export const getCurrencies = async () => {
+
+    const res = await axios.get(server + "/api/currency");
+
+    return res.data;
+
+}
+
+export const addCurrency = async (data) => {
+
+    const res = await axios.post(server + "/api/currency", data, { headers: { "x-auth-token": document && cookie.parse(document.cookie).token, "Accept-Encoding": "gzip,deflate,compress" } });
+
+    return res.data;
+
+}
+
+export const editCurrency = async (id, data) => {
+
+    const res = await axios.put(server + "/api/currency/" + id, data, { headers: { "x-auth-token": document && cookie.parse(document.cookie).token, "Accept-Encoding": "gzip,deflate,compress" } });
+
+    return res.data;
+
+}
+
+export const removeCurrency = async (id) => {
+
+    const res = await axios.delete(server + "/api/currency/" + id, { headers: { "x-auth-token": document && cookie.parse(document.cookie).token, "Accept-Encoding": "gzip,deflate,compress" } });
+
+    return res.data;
+
+}
+
+/* export const getCurrencies = async () => {
 
     const res = await axios.get(server + "/api/currency");
 
@@ -123,4 +155,4 @@ export const removeCurrenciesList2 = async (items) => {
 
     return res.data;
 
-}
+} */
