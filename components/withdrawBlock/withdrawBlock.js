@@ -83,7 +83,7 @@ const WithdrawBlock = ({ admin, children, style }) => {
     const changeCount = ({ target } = {}) => {
         if(editMode) return;
         if(!target) target = {value: count};
-        if(!Number(target.value)) return;
+        if(!Number(target.value)) return setCount(target.value);
         const val = target.value = Math.max(Number(target.value), currencies[firstSelected].minCount);
         //console.log(1, val, Number((giveArr[secondSelected].deps.find(e2 => e2.id == currencies[firstSelected]._id).ratio * val).toFixed(5)));
         setCount(val);
@@ -92,7 +92,7 @@ const WithdrawBlock = ({ admin, children, style }) => {
 
     const changePrice = ({ target } = {}) => {
         if(!target) target = {value: price};
-        if(!Number(target.value)) return;
+        if(!Number(target.value)) return setPrice(target.value);
         const val = target.value = Number(target.value);
         if(editMode){
             if(!target) return;
@@ -131,9 +131,10 @@ const WithdrawBlock = ({ admin, children, style }) => {
         changeCount();
     }, [firstSelected]);
 
+    const [ init_, setInit_ ] = useState(false);
     useEffect(() => {
-        if(!count && currencies[firstSelected] && giveArr[secondSelected]){
-            //console.log("Hi!")
+        if(!init_ && !count && currencies[firstSelected] && giveArr[secondSelected]){
+            setInit_(true);
             changeCount({ target: { value: 1 }});
         }
     });
