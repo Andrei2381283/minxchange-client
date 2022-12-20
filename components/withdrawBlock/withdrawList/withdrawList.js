@@ -54,7 +54,7 @@ const WithdrawList = ({ currencies, updateCurrencies, type, selected2, editCurre
             editCurrencies[selected2._id].deps = selected2.deps;
         }
         //console.log(editCurrencies);
-        updateCurrencies();
+        await updateCurrencies();
         select(selectedItem);
     }
 
@@ -75,7 +75,7 @@ const WithdrawList = ({ currencies, updateCurrencies, type, selected2, editCurre
 
     const removeItem = (id) => async () => {
         await removeCurrency(id);
-        updateCurrencies();
+        await updateCurrencies();
         select(selectedItem);
     }
 
